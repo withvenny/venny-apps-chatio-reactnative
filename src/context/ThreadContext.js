@@ -81,7 +81,7 @@ const addThread = dispatch => {
 
       //
       let path = '/threads?';
-      path += '&token='+'tkn_thentrlco';
+      path += 'token='+'tkn_thentrlco';
       path += '&app='+'app_thentrlco';
       path += '&profile='+profile;
       //path += '&id='+`${id}`;
@@ -135,13 +135,13 @@ const deleteThread = dispatch => {
   };
 };
   
-// Thread EDIT
+// Thread UPDATE
 const editThread = dispatch => {
   
   //
   return async (id,title,administrators,contributors,preview,profile,callback) => {
-  
-    console.log(await AsyncStorage.getItem('profile'));
+
+    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
     Alert.alert("New token set for editThread: " + profile);
 
@@ -153,39 +153,36 @@ const editThread = dispatch => {
     participants.administrators.push(administrators);
     
     //
-    participants.contributors = [profile] ;
+    participants.contributors = [`${profile}`];
     participants.contributors.push(contributors);
 
-    //Result:
-    console.log(participants);
+  //Result:
+  console.log(participants);
 
-    //
+      //
       let path = '/threads?';
-      path += '&token='+'tkn_thentrlco';
+      path += 'token='+'tkn_thentrlco';
       path += '&app='+'app_thentrlco';
       path += '&profile='+profile;
       path += '&id='+`${id}`;
       path += '&title='+`${title}`;
-      path += '&participants='+participants;
+      path += '&participants='+ JSON.stringify(participants);
+      //path += '&participants='+`${participants}`;
       path += '&preview='+`${preview}`;
 
       //
-      console.log("path: " + path);
+      console.log("path: "+path);
   
       //
       const response = await api.put(path);
   
       //console.log(response);
   
-      dispatch({
-      type: 'edit_thread',
-      payload: { id, title, administrators, contributors, profile, preview }
-      });
       if (callback) {
       callback();
       }
   };
-  };
+};
 
 //
 export const { Context, Provider } = createDataContext(
