@@ -57,7 +57,7 @@ const ThreadForm = ({ onSubmit, initialValues }) => {
         onChangeText={text => setProfile(text)}
       />
 
-      <Button title="Save Thread" onPress={() => onSubmit(title,administrators,contributors,preview)} />
+      <Button title="Save Thread" onPress={() => onSubmit(title,administrators,contributors,preview,profile)} />
     </View>
   );
 };
@@ -65,7 +65,8 @@ const ThreadForm = ({ onSubmit, initialValues }) => {
 ThreadForm.defaultProps = {
   initialValues: {
     title: '',
-    participants: '',
+    administrators: '',
+    contributors: '',
     preview: '',
     profile: ''
   }

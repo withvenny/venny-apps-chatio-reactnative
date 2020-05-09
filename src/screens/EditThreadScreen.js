@@ -13,15 +13,19 @@ const EditThreadScreen = ({ navigation }) => {
     <ThreadForm
       initialValues={{
         title: thread.title,
-        participants: thread.participants,
-        preview: thread.preview
+        administrators: thread.administrators,
+        contributors: thread.contributors,
+        preview: thread.preview,
+        profile: thread.profile
       }}
-      onSubmit={(title,participants,preview) => {
+      onSubmit={(title,administrators,contributors,preview,profile) => {
         editThread(
           id,
           title,
-          participants,
+          administrators,
+          contributors,
           preview,
+          profile,
           () => navigation.pop()
         );
       }}

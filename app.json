@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NTRL",
-    "slug": "ntrl",
+    "name": "Chatio",
+    "slug": "chatio",
     "platforms": [
       "ios",
       "android",
@@ -24,7 +24,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "The NTRL Co. present NTRL, the collaboration hub for music.",
-    "githubUrl": "https://github.com/withvenny/venny-app-ntrl"
+    "description": "Chatio is a messaging app from Venny. We believe that enabling users to share ideas with each other is a cornerstone of modern digital experiences.",
+    "githubUrl": "https://github.com/withvenny/venny-apps-chatio-reactnative"
   }
 }

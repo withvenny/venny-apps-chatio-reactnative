@@ -11,8 +11,8 @@ const CreateThreadScreen = ({ navigation }) => {
 
   return (
     <ThreadForm
-      onSubmit={(title,participants,preview,profile) => {
-        addThread(title,participants,preview,profile, () => navigation.navigate('IndexThread'));
+      onSubmit={(title,administrators,contributors,preview,profile) => {
+        addThread(title,administrators,contributors,preview,profile, () => navigation.navigate('IndexThread'));
       }}
     />
   );

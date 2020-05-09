@@ -1,7 +1,4 @@
 import createDataContext from 'src/context/createDataContext';
-import {
-  Alert, AsyncStorage,
-} from 'react-native';
 import api from 'src/api';
 
 //
@@ -28,16 +25,12 @@ const getThreads = dispatch => {
 
   //
   return async () => {
-
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
-    var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for getThreads: " + profile);  
   
       //
       let path = '/threads?';
       path += '&token='+'tok_thentrlco';
       path += '&app='+'app_thentrlco';
-      path += '&profile='+profile;
+      path += '&profile='+'prf_adolphusnolan';
       //path += '&id='+`${id}`;
       //path += '&title='+`${title}`;
       //path += '&participants='+`${participants}`;
@@ -59,23 +52,29 @@ const getThreads = dispatch => {
 const addThread = dispatch => {
   
   //
-  return async (title,administrators,contributors,preview,profile,callback) => {
+  return async (title,administrators,contributors,preview,callback) => {
 
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
-    var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for addThread: " + profile);
+    var administrators = { 
+      administrators: [
+        'prf_adolphusnolan',
+        'prf_dominickclayton',
+        'prf_anthonybuchanan',
+      ]
+    }
 
-    //
-    var participants = {"blocked":[]};
-
-    //
-    participants.administrators = [];
-    participants.administrators.push(administrators);
-    
-    //
-    participants.contributors = [`${profile}`];
-    participants.contributors.push(contributors);
-
+  var contributors = {
+    contributors: [
+      'prf_adolphusnolan',
+      'prf_dominickclayton',
+      'prf_anthonybuchanan',
+      'prf_crystalarmstrong',
+      'prf_kaywht',
+      'prf_ghostboyslim',
+    ]
+  }
+  
+  participants = Object.assign(contributors, administrators);
+  
   //Result:
   console.log(participants);
 
@@ -83,11 +82,10 @@ const addThread = dispatch => {
       let path = '/threads?';
       path += '&token='+'tkn_thentrlco';
       path += '&app='+'app_thentrlco';
-      path += '&profile='+profile;
+      path += '&profile='+'prf_adolphusnolan';
       //path += '&id='+`${id}`;
       path += '&title='+`${title}`;
       path += '&participants='+ JSON.stringify(participants);
-      //path += '&participants='+`${participants}`;
       path += '&preview='+`${preview}`;
 
       //
@@ -109,16 +107,12 @@ const deleteThread = dispatch => {
   
   //
   return async id => {
-
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
-    var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for deleteThread: " + profile);
   
       //
       let path = '/threads?';
       path += '&token='+'tkn_thentrlco';
       path += '&app='+'app_thentrlco';
-      path += '&profile='+profile;
+      path += '&profile='+'prf_adolphusnolan';
       path += '&id='+`${id}`;
       //path += '&title='+`${title}`;
       //path += '&participants='+`${participants}`;
@@ -139,38 +133,20 @@ const deleteThread = dispatch => {
 const editThread = dispatch => {
   
   //
-  return async (id,title,administrators,contributors,preview,profile,callback) => {
+  return async (id,title,administrators,contributors,profile,preview,callback) => {
   
-    console.log(await AsyncStorage.getItem('profile'));
-    var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for editThread: " + profile);
-
-    //
-    var participants = {"blocked":[]};
-
-    //
-    participants.administrators = [];
-    participants.administrators.push(administrators);
-    
-    //
-    participants.contributors = [profile] ;
-    participants.contributors.push(contributors);
-
-    //Result:
-    console.log(participants);
-
-    //
+      //
       let path = '/threads?';
       path += '&token='+'tkn_thentrlco';
       path += '&app='+'app_thentrlco';
-      path += '&profile='+profile;
+      path += '&profile='+'prf_adolphusnolan';
       path += '&id='+`${id}`;
       path += '&title='+`${title}`;
-      path += '&participants='+participants;
+      path += '&participants='+`${participants}`;
       path += '&preview='+`${preview}`;
 
       //
-      console.log("path: " + path);
+      console.log("path: "+path);
   
       //
       const response = await api.put(path);

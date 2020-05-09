@@ -49,8 +49,6 @@ const signup = dispatch => async ({ email, password, name }) => {
       
       //
       const response = await api.post(path);
-      
-      await AsyncStorage.setItem('token', response.data.data.profile[0].id);
     
       dispatch({ type: 'signin', payload: response.data.data });
 
@@ -82,7 +80,17 @@ const signin = dispatch => async ({ email, password }) => {
 
   try {
     const response = await api.post(path);
+
     await AsyncStorage.setItem('token', response.data.data.profile[0].id);
+    await AsyncStorage.setItem('profile', response.data.data.profile[0].id);
+
+    console.log(await AsyncStorage.getItem('Token: ' + 'token'));
+    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+
+    var profile = await AsyncStorage.getItem('profile');
+
+    Alert.alert("New token set: " + profile);
+
     dispatch({ type: 'signin', payload: response.data.data.profile[0].id });
     navigate('experienceFlow');
   } catch (err) {

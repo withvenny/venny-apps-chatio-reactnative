@@ -20,12 +20,6 @@ import EditScreen from './src/screens/EditScreen';
 // HOME
 import HomeScreen from './src/screens/HomeScreen';
 
-// POST
-import IndexPostScreen from './src/screens/IndexPostScreen';
-import ShowPostScreen from './src/screens/ShowPostScreen';
-import CreatePostScreen from './src/screens/CreatePostScreen';
-import EditPostScreen from './src/screens/EditPostScreen';
-
 // FOLLOWSHIP
 import IndexFollowshipScreen from './src/screens/IndexFollowshipScreen';
 import ShowFollowshipScreen from './src/screens/ShowFollowshipScreen';
@@ -51,7 +45,6 @@ import ResultsShowScreen from './src/screens/ResultsShowScreen';
 
 //
 import { Provider as AuthProvider } from './src/context/AuthContext';
-import { Provider as PostProvider } from './src/context/PostContext';
 import { Provider as FollowshipProvider } from './src/context/FollowshipContext';
 import { Provider as ProfileProvider } from './src/context/ProfileContext';
 import { Provider as ThreadProvider } from './src/context/ThreadContext';
@@ -66,11 +59,6 @@ const navigator = createStackNavigator({
   Show: ShowScreen,
   Create: CreateScreen,
   Edit: EditScreen,
-
-  IndexPost: IndexPostScreen,
-  ShowPost: ShowPostScreen,
-  CreatePost: CreatePostScreen,
-  EditPost: EditPostScreen,
 
   IndexFollowship: IndexFollowshipScreen,
   ShowFollowship: ShowFollowshipScreen,
@@ -114,13 +102,6 @@ const discoverStack = createStackNavigator({
   Discover: DiscoverScreen,
 });
 
-const projectStack = createStackNavigator({
-  IndexPost: IndexPostScreen,
-  ShowPost: ShowPostScreen,
-  CreatePost: CreatePostScreen,
-  EditPost: EditPostScreen,
-});
-
 const inboxStack = createStackNavigator({
   IndexThread: IndexThreadScreen,
   ShowThread: ShowThreadScreen,
@@ -130,11 +111,6 @@ const inboxStack = createStackNavigator({
 
 //
 const profileStack = createStackNavigator({
-
-  IndexPost: IndexPostScreen,
-  ShowPost: ShowPostScreen,
-  CreatePost: CreatePostScreen,
-  EditPost: EditPostScreen,
 
   IndexFollowship: IndexFollowshipScreen,
   ShowFollowship: ShowFollowshipScreen,
@@ -159,7 +135,6 @@ const switchNavigator = createSwitchNavigator({
   experienceFlow: createBottomTabNavigator({
     homeStack,
     discoverStack,
-    projectStack,
     inboxStack,
     profileStack
   }),
@@ -167,7 +142,6 @@ const switchNavigator = createSwitchNavigator({
 
 homeStack.navigationOptions = { title: 'Home', tabBarIcon: <FontAwesome name="home" size={20} /> };
 discoverStack.navigationOptions = { title: 'Discover', tabBarIcon: <FontAwesome name="search" size={20} /> };
-projectStack.navigationOptions = { title: 'Project', tabBarIcon: <FontAwesome name="plus" size={20} /> };
 inboxStack.navigationOptions = { title: 'Inbox', tabBarIcon: <FontAwesome name="comments" size={20} /> };
 profileStack.navigationOptions = { title: 'Me', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
@@ -182,15 +156,13 @@ export default () => {
   
   return (
     <FollowshipProvider>
-      <PostProvider>
-        <ProfileProvider>
-          <ThreadProvider>
-            <AuthProvider>
-              <App ref={ navigator => { setNavigator(navigator); } }/>
-            </AuthProvider>
-          </ThreadProvider>
-        </ProfileProvider>
-      </PostProvider>
+      <ProfileProvider>
+        <ThreadProvider>
+          <AuthProvider>
+            <App ref={ navigator => { setNavigator(navigator); } }/>
+          </AuthProvider>
+        </ThreadProvider>
+      </ProfileProvider>
     </FollowshipProvider>
   );
 };

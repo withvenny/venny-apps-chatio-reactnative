@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Context as ThreadProvider } from '../context/ThreadContext';
+import { Context as ThreadProvider } from 'src/context/ThreadContext';
 import { EvilIcons } from '@expo/vector-icons';
 
 //
@@ -20,9 +20,9 @@ const ShowThreadScreen = ({ navigation }) => {
     <View>
       <Text>ID: {thread.id}</Text>
       <Text>Title: {thread.title}</Text>
+      <Text>Administrators: {thread.participants.administrators.toString()}</Text>
+      <Text>Contributors: {thread.participants.contributors.toString()}</Text>
       <Text>Preview: {thread.preview}</Text>
-      <Text>Participants: {thread.participants.administrator}</Text>
-      <Text>Participants: {thread.participants.contributors.toString()}</Text>
       <Text>Profile: {thread.profile}</Text>
     </View>
   );

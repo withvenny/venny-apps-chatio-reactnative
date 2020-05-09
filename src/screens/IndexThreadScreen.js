@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { Context } from '../context/ThreadContext';
+import { Context } from 'src/context/ThreadContext';
 import { Feather } from '@expo/vector-icons';
 
 //
@@ -26,7 +26,7 @@ const IndexThreadScreen = ({ navigation }) => {
     return () => {
       listener.remove();
     };
-  }, []);
+  }, [])
 
   return (
     <View>
