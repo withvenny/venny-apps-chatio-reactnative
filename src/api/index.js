@@ -8,7 +8,7 @@ let url;
 if (__DEV__) {
   url = 'https://io-venny-api.herokuapp.com';
 } else {
-  url = 'https://api.venny.io';
+  url = 'https://io-venny-api.herokuapp.com';
 }
 
 export default axios.create({
