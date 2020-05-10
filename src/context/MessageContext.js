@@ -1,16 +1,19 @@
 import createDataContext from 'src/context/createDataContext';
+import {
+  Alert, AsyncStorage,
+} from 'react-native';
 import api from 'src/api';
 
 //
-const threadReducer = (state, action) => {
+const messageReducer = (state, action) => {
 
   //
   switch (action.type) {
 
     //
-    case 'get_threads': return action.payload;
-    case 'edit_thread': return state.map(thread => { return thread.id === action.payload.id ? action.payload : thread; });
-    case 'delete_thread': return state.filter(thread => thread.id !== action.payload);
+    case 'get_messages': return action.payload;
+    case 'edit_message': return state.map(message => { return message.id === action.payload.id ? action.payload : message; });
+    case 'delete_message': return state.filter(message => message.id !== action.payload);
 
     default:
 
@@ -20,22 +23,27 @@ const threadReducer = (state, action) => {
 
 };
 
-// Thread GET
-const getThreads = dispatch => {
+// Message GET
+const getMessages = dispatch => {
 
   //
   return async () => {
+
+    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    var profile = await AsyncStorage.getItem('profile');
+    Alert.alert("New token set for getMessages: " + profile);
   
       //
-      let path = '/threads?';
+      let path = '/messages?';
       path += '&token='+'tok_thentrlco';
       path += '&app='+'app_thentrlco';
-      path += '&profile='+'prf_adolphusnolan';
+      path += '&profile='+profile;
       //path += '&id='+`${id}`;
-      //path += '&title='+`${title}`;
-      //path += '&participants='+`${participants}`;
-      //path += '&preview='+`${preview}`;
-  
+      //path += '&body='+`${body}`;
+      //path += '&images='+ JSON.stringify(images);
+      //path += '&deleted='+`${deleted}`;
+      //path += '&thread='+`${thread}`;
+      
       //
       console.log("path: "+path);
       
@@ -44,49 +52,30 @@ const getThreads = dispatch => {
 
       console.log(response.data.data);
   
-      dispatch({ type: 'get_threads', payload: response.data.data });
+      dispatch({ type: 'get_messages', payload: response.data.data });
   };
 };
   
-// Thread ADD
-const addThread = dispatch => {
+// Message ADD
+const addMessage = dispatch => {
   
   //
-  return async (title,administrators,contributors,preview,callback) => {
+  return async (title,administrators,contributors,preview,profile,callback) => {
 
-    var administrators = { 
-      administrators: [
-        'prf_adolphusnolan',
-        'prf_dominickclayton',
-        'prf_anthonybuchanan',
-      ]
-    }
-
-  var contributors = {
-    contributors: [
-      'prf_adolphusnolan',
-      'prf_dominickclayton',
-      'prf_anthonybuchanan',
-      'prf_crystalarmstrong',
-      'prf_kaywht',
-      'prf_ghostboyslim',
-    ]
-  }
-  
-  participants = Object.assign(contributors, administrators);
-  
-  //Result:
-  console.log(participants);
-
+    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    var profile = await AsyncStorage.getItem('profile');
+    Alert.alert("New token set for addMessage: " + profile);
+    
       //
-      let path = '/threads?';
-      path += '&token='+'tkn_thentrlco';
+      let path = '/messages?';
+      path += 'token='+'tkn_thentrlco';
       path += '&app='+'app_thentrlco';
-      path += '&profile='+'prf_adolphusnolan';
+      path += '&profile='+profile;
       //path += '&id='+`${id}`;
-      path += '&title='+`${title}`;
-      path += '&participants='+ JSON.stringify(participants);
-      path += '&preview='+`${preview}`;
+      path += '&body='+`${body}`;
+      //path += '&images='+ JSON.stringify(images);
+      path += '&deleted='+`${deleted}`;
+      path += '&thread='+`${thread}`;
 
       //
       console.log("path: "+path);
@@ -102,21 +91,26 @@ const addThread = dispatch => {
   };
 };
   
-// Thread DELETE
-const deleteThread = dispatch => {
+// Message DELETE
+const deleteMessage = dispatch => {
   
   //
   return async id => {
+
+    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    var profile = await AsyncStorage.getItem('profile');
+    Alert.alert("New token set for deleteMessage: " + profile);
   
       //
-      let path = '/threads?';
+      let path = '/messages?';
       path += '&token='+'tkn_thentrlco';
       path += '&app='+'app_thentrlco';
-      path += '&profile='+'prf_adolphusnolan';
+      path += '&profile='+profile;
       path += '&id='+`${id}`;
-      //path += '&title='+`${title}`;
-      //path += '&participants='+`${participants}`;
-      //path += '&preview='+`${preview}`;
+      //path += '&body='+`${body}`;
+      //path += '&images='+ JSON.stringify(images);
+      //path += '&deleted='+`${deleted}`;
+      //path += '&thread='+`${thread}`;
 
       //
       console.log("path: "+path);
@@ -125,25 +119,30 @@ const deleteThread = dispatch => {
   
       //console.log(response.data.data);
   
-      dispatch({ type: 'delete_thread', payload: id });
+      dispatch({ type: 'delete_message', payload: id });
   };
 };
   
-// Thread EDIT
-const editThread = dispatch => {
+// Message UPDATE
+const editMessage = dispatch => {
   
   //
-  return async (id,title,administrators,contributors,profile,preview,callback) => {
-  
+  return async (id,title,administrators,contributors,preview,profile,callback) => {
+
+    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    var profile = await AsyncStorage.getItem('profile');
+    Alert.alert("New token set for editMessage: " + profile);
+
       //
-      let path = '/threads?';
-      path += '&token='+'tkn_thentrlco';
+      let path = '/messages?';
+      path += 'token='+'tkn_thentrlco';
       path += '&app='+'app_thentrlco';
-      path += '&profile='+'prf_adolphusnolan';
+      path += '&profile='+profile;
       path += '&id='+`${id}`;
-      path += '&title='+`${title}`;
-      path += '&participants='+`${participants}`;
-      path += '&preview='+`${preview}`;
+      path += '&body='+`${body}`;
+      //path += '&images='+ JSON.stringify(images);
+      path += '&deleted='+`${deleted}`;
+      //path += '&thread='+`${thread}`;
 
       //
       console.log("path: "+path);
@@ -153,22 +152,18 @@ const editThread = dispatch => {
   
       //console.log(response);
   
-      dispatch({
-      type: 'edit_thread',
-      payload: { id, title, administrators, contributors, profile, preview }
-      });
       if (callback) {
       callback();
       }
   };
-  };
+};
 
 //
 export const { Context, Provider } = createDataContext(
-  threadReducer, {
-    addThread,
-    deleteThread,
-    editThread,
-    getThreads,
+  messageReducer, {
+    addMessage,
+    deleteMessage,
+    editMessage,
+    getMessages,
   },[]
 );
