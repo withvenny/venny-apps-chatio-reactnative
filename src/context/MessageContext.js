@@ -35,17 +35,17 @@ const getMessages = dispatch => {
   
       //
       let path = '/messages?';
-      path += '&token='+'tok_thentrlco';
-      path += '&app='+'app_thentrlco';
-      path += '&profile='+profile;
+      path += 'token=' + 'tok_thentrlco';
+      path += '&app=' + 'app_thentrlco';
+      path += '&profile=' + profile;
+      //path += '&thread='+`${thread}`;
       //path += '&id='+`${id}`;
       //path += '&body='+`${body}`;
       //path += '&images='+ JSON.stringify(images);
       //path += '&deleted='+`${deleted}`;
-      //path += '&thread='+`${thread}`;
       
       //
-      console.log("path: "+path);
+      console.log("path: " + path);
       
       //
       const response = await api.get(path);
@@ -60,7 +60,7 @@ const getMessages = dispatch => {
 const addMessage = dispatch => {
   
   //
-  return async (title,administrators,contributors,preview,profile,callback) => {
+  return async (thread,body,deleted,callback) => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
@@ -68,22 +68,22 @@ const addMessage = dispatch => {
     
       //
       let path = '/messages?';
-      path += 'token='+'tkn_thentrlco';
-      path += '&app='+'app_thentrlco';
-      path += '&profile='+profile;
-      //path += '&id='+`${id}`;
-      path += '&body='+`${body}`;
-      //path += '&images='+ JSON.stringify(images);
-      path += '&deleted='+`${deleted}`;
-      path += '&thread='+`${thread}`;
+      path += 'token=' + 'tkn_thentrlco';
+      path += '&app=' + 'app_thentrlco';
+      path += '&profile=' + profile;
+      path += '&thread=' + `${thread}`;
+      //path += '&id=' + `${id}`;
+      path += '&body=' + `${body}`;
+      //path += '&images=' + JSON.stringify(images);
+      path += '&deleted=' + `${deleted}`;
 
       //
-      console.log("path: "+path);
+      console.log("path: " + path);
   
       //
       const response = await api.post(path);
   
-      //console.log(response);
+      console.log(response);
   
       if (callback) {
       callback();
@@ -103,17 +103,17 @@ const deleteMessage = dispatch => {
   
       //
       let path = '/messages?';
-      path += '&token='+'tkn_thentrlco';
-      path += '&app='+'app_thentrlco';
-      path += '&profile='+profile;
-      path += '&id='+`${id}`;
-      //path += '&body='+`${body}`;
-      //path += '&images='+ JSON.stringify(images);
-      //path += '&deleted='+`${deleted}`;
-      //path += '&thread='+`${thread}`;
+      path += '&token=' + 'tkn_thentrlco';
+      path += '&app=' + 'app_thentrlco';
+      path += '&profile=' + profile;
+      //path += '&thread=' + `${thread}`;
+      path += '&id=' + `${id}`;
+      //path += '&body=' + `${body}`;
+      //path += '&images=' + JSON.stringify(images);
+      //path += '&deleted=' + `${deleted}`;
 
       //
-      console.log("path: "+path);
+      console.log("path: " + path);
   
       const response = await api.delete(path);
   
@@ -127,7 +127,7 @@ const deleteMessage = dispatch => {
 const editMessage = dispatch => {
   
   //
-  return async (id,title,administrators,contributors,preview,profile,callback) => {
+  return async (id,body,deleted,callback) => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
@@ -135,14 +135,14 @@ const editMessage = dispatch => {
 
       //
       let path = '/messages?';
-      path += 'token='+'tkn_thentrlco';
-      path += '&app='+'app_thentrlco';
-      path += '&profile='+profile;
-      path += '&id='+`${id}`;
-      path += '&body='+`${body}`;
+      path += 'token=' + 'tkn_thentrlco';
+      path += '&app=' + 'app_thentrlco';
+      path += '&profile=' + profile;
+      //path += '&thread=' + `${thread}`;
+      path += '&id=' + `${id}`;
+      path += '&body=' + `${body}`;
       //path += '&images='+ JSON.stringify(images);
-      path += '&deleted='+`${deleted}`;
-      //path += '&thread='+`${thread}`;
+      path += '&deleted=' + `${deleted}`;
 
       //
       console.log("path: "+path);
@@ -153,8 +153,9 @@ const editMessage = dispatch => {
       //console.log(response);
   
       if (callback) {
-      callback();
+        callback();
       }
+
   };
 };
 

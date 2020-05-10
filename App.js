@@ -32,6 +32,12 @@ import ShowThreadScreen from './src/screens/ShowThreadScreen';
 import CreateThreadScreen from './src/screens/CreateThreadScreen';
 import EditThreadScreen from './src/screens/EditThreadScreen';
 
+// MESSAGE
+import IndexMessageScreen from './src/screens/IndexMessageScreen';
+import ShowMessageScreen from './src/screens/ShowMessageScreen';
+import CreateMessageScreen from './src/screens/CreateMessageScreen';
+import EditMessageScreen from './src/screens/EditMessageScreen';
+
 // PROFILE
 import IndexProfileScreen from './src/screens/IndexProfileScreen';
 import ShowProfileScreen from './src/screens/ShowProfileScreen';
@@ -48,6 +54,7 @@ import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as FollowshipProvider } from './src/context/FollowshipContext';
 import { Provider as ProfileProvider } from './src/context/ProfileContext';
 import { Provider as ThreadProvider } from './src/context/ThreadContext';
+import { Provider as MessageProvider } from './src/context/MessageContext';
 import { setNavigator } from 'src/navigationRef';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 
@@ -69,6 +76,11 @@ const navigator = createStackNavigator({
   ShowThread: ShowThreadScreen,
   CreateThread: CreateThreadScreen,
   EditThread: EditThreadScreen,
+
+  IndexMessage: IndexMessageScreen,
+  ShowMessage: ShowMessageScreen,
+  CreateMessage: CreateMessageScreen,
+  EditMessage: EditMessageScreen,
 
   IndexProfile: IndexProfileScreen,
   ShowProfile: ShowProfileScreen,
@@ -107,6 +119,10 @@ const inboxStack = createStackNavigator({
   ShowThread: ShowThreadScreen,
   CreateThread: CreateThreadScreen,
   EditThread: EditThreadScreen,
+  IndexMessage: IndexMessageScreen,
+  ShowMessage: ShowMessageScreen,
+  CreateMessage: CreateMessageScreen,
+  EditMessage: EditMessageScreen,
 });
 
 //
@@ -158,9 +174,11 @@ export default () => {
     <FollowshipProvider>
       <ProfileProvider>
         <ThreadProvider>
-          <AuthProvider>
-            <App ref={ navigator => { setNavigator(navigator); } }/>
-          </AuthProvider>
+          <MessageProvider>
+            <AuthProvider>
+              <App ref={ navigator => { setNavigator(navigator); } }/>
+            </AuthProvider>
+          </MessageProvider>
         </ThreadProvider>
       </ProfileProvider>
     </FollowshipProvider>

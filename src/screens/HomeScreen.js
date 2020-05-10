@@ -28,6 +28,10 @@ const HomeScreen = ({ navigation }) => {
             title="Go to Threads"
         />
         <Button
+            onPress={()=> navigation.navigate('IndexMessage')}
+            title="Go to Messages"
+        />
+        <Button
             onPress={()=> navigation.navigate('Account')}
             title="Go to Account"
         />
