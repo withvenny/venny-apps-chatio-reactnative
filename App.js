@@ -98,22 +98,26 @@ const navigator = createStackNavigator({
   }
 });
 
+//
 const onboardingStack = createStackNavigator({
   SignIn: SignInScreen,
   SignUp: SignUpScreen,
 });
 
+//
 const homeStack = createStackNavigator({
   Home: HomeScreen,
   Account: AccountScreen
 });
 
+//
 const discoverStack = createStackNavigator({
   Search: SearchScreen,
   ResultsShow: ResultsShowScreen,
   Discover: DiscoverScreen,
 });
 
+//
 const inboxStack = createStackNavigator({
   IndexThread: IndexThreadScreen,
   ShowThread: ShowThreadScreen,
@@ -123,6 +127,36 @@ const inboxStack = createStackNavigator({
   ShowMessage: ShowMessageScreen,
   CreateMessage: CreateMessageScreen,
   EditMessage: EditMessageScreen,
+});
+
+// CHAT
+const chatStack = createStackNavigator({
+
+  //
+  IndexThread: IndexThreadScreen,
+  ShowThread: ShowThreadScreen,
+  CreateThread: CreateThreadScreen,
+
+  //
+  IndexMessage: IndexMessageScreen,
+  ShowMessage: ShowMessageScreen,
+  CreateMessage: CreateMessageScreen,
+
+});
+
+// PEOPLE
+const peopleStack = createStackNavigator({
+
+  IndexFollowship: IndexFollowshipScreen,
+  ShowFollowship: ShowFollowshipScreen,
+  CreateFollowship: CreateFollowshipScreen,
+  EditFollowship: EditFollowshipScreen,
+
+  IndexProfile: IndexProfileScreen,
+  ShowProfile: ShowProfileScreen,
+  CreateProfile: CreateProfileScreen,
+  EditProfile: EditProfileScreen,
+
 });
 
 //
@@ -149,23 +183,31 @@ const switchNavigator = createSwitchNavigator({
     onboardingStack,
   }),
   experienceFlow: createBottomTabNavigator({
-    homeStack,
-    discoverStack,
-    inboxStack,
-    profileStack
+    //homeStack,
+    //discoverStack,
+    //inboxStack,
+    //profileStack,
+    chatStack,
+    peopleStack,
   }),
 });
 
+//
 homeStack.navigationOptions = { title: 'Home', tabBarIcon: <FontAwesome name="home" size={20} /> };
 discoverStack.navigationOptions = { title: 'Discover', tabBarIcon: <FontAwesome name="search" size={20} /> };
 inboxStack.navigationOptions = { title: 'Inbox', tabBarIcon: <FontAwesome name="comments" size={20} /> };
 profileStack.navigationOptions = { title: 'Me', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
+chatStack.navigationOptions = { title: 'Chats', tabBarIcon: <FontAwesome name="comments" size={20} /> };
+peopleStack.navigationOptions = { title: 'People', tabBarIcon: <FontAwesome name="users" size={20} /> };
+
+//
 SignUpScreen.navigationOptions = {
   title: 'Welcome',
   tabBarIcon: <FontAwesome name="th-list" size={20} />
 };
 
+//
 const App = createAppContainer(switchNavigator);
 
 export default () => {

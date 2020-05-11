@@ -12,7 +12,7 @@ import { Feather } from '@expo/vector-icons';
 
 //
 const IndexMessageScreen = ({ navigation }) => {
-  
+
   //
   const { state, deleteMessage, getMessages } = useContext(Context);
 

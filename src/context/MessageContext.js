@@ -18,9 +18,44 @@ const messageReducer = (state, action) => {
     default:
 
       return state;
-  
+
   }
 
+};
+
+// Message ADD
+const addMessage = dispatch => {
+  
+  //
+  return async (thread,body,deleted,callback) => {
+
+    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    var profile = await AsyncStorage.getItem('profile');
+    Alert.alert("New token set for addMessage: " + profile);
+    
+      //
+      let path = '/messages?';
+      path += 'token=' + 'tkn_thentrlco';
+      path += '&app=' + 'app_thentrlco';
+      path += '&profile=' + profile;
+      path += '&thread=' + `${thread}`;
+      //path += '&id=' + `${id}`;
+      path += '&body=' + `${body}`;
+      //path += '&images=' + JSON.stringify(images);
+      path += '&deleted=' + `${deleted}`;
+
+      //
+      console.log("path: " + path);
+  
+      //
+      const response = await api.post(path);
+  
+      console.log(response);
+  
+      if (callback) {
+      callback();
+      }
+  };
 };
 
 // Message GET
@@ -56,41 +91,42 @@ const getMessages = dispatch => {
   };
 };
   
-// Message ADD
-const addMessage = dispatch => {
+// Message UPDATE
+const editMessage = dispatch => {
   
   //
-  return async (thread,body,deleted,callback) => {
+  return async (id,body,deleted,callback) => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for addMessage: " + profile);
-    
+    Alert.alert("New token set for editMessage: " + profile);
+
       //
       let path = '/messages?';
       path += 'token=' + 'tkn_thentrlco';
       path += '&app=' + 'app_thentrlco';
       path += '&profile=' + profile;
-      path += '&thread=' + `${thread}`;
-      //path += '&id=' + `${id}`;
+      //path += '&thread=' + `${thread}`;
+      path += '&id=' + `${id}`;
       path += '&body=' + `${body}`;
-      //path += '&images=' + JSON.stringify(images);
+      //path += '&images='+ JSON.stringify(images);
       path += '&deleted=' + `${deleted}`;
 
       //
       console.log("path: " + path);
   
       //
-      const response = await api.post(path);
+      const response = await api.put(path);
   
       console.log(response);
   
       if (callback) {
-      callback();
+        callback();
       }
+
   };
 };
-  
+
 // Message DELETE
 const deleteMessage = dispatch => {
   
@@ -120,42 +156,6 @@ const deleteMessage = dispatch => {
       //console.log(response.data.data);
   
       dispatch({ type: 'delete_message', payload: id });
-  };
-};
-  
-// Message UPDATE
-const editMessage = dispatch => {
-  
-  //
-  return async (id,body,deleted,callback) => {
-
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
-    var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for editMessage: " + profile);
-
-      //
-      let path = '/messages?';
-      path += 'token=' + 'tkn_thentrlco';
-      path += '&app=' + 'app_thentrlco';
-      path += '&profile=' + profile;
-      //path += '&thread=' + `${thread}`;
-      path += '&id=' + `${id}`;
-      path += '&body=' + `${body}`;
-      //path += '&images='+ JSON.stringify(images);
-      path += '&deleted=' + `${deleted}`;
-
-      //
-      console.log("path: "+path);
-  
-      //
-      const response = await api.put(path);
-  
-      //console.log(response);
-  
-      if (callback) {
-        callback();
-      }
-
   };
 };
 
