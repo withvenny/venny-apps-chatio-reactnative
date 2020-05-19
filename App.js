@@ -49,6 +49,10 @@ import DiscoverScreen from './src/screens/DiscoverScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import ResultsShowScreen from './src/screens/ResultsShowScreen';
 
+// CHATS
+import ChatScreen from './src/screens/Experience/ChatioChatScreen';
+import ChatsScreen from './src/screens/Experience/ChatioChatsScreen';
+
 //
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { Provider as FollowshipProvider } from './src/context/FollowshipContext';
@@ -133,14 +137,8 @@ const inboxStack = createStackNavigator({
 const chatStack = createStackNavigator({
 
   //
-  IndexThread: IndexThreadScreen,
-  ShowThread: ShowThreadScreen,
-  CreateThread: CreateThreadScreen,
-
-  //
-  IndexMessage: IndexMessageScreen,
-  ShowMessage: ShowMessageScreen,
-  CreateMessage: CreateMessageScreen,
+  Chats: ChatsScreen,
+  Chat: ChatScreen
 
 });
 

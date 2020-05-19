@@ -10,28 +10,29 @@ import { Context } from 'src/context/MessageContext';
 import { Feather } from '@expo/vector-icons';
 
 //
-const IndexMessageScreen = ({ navigation }) => {
+const ChatioChatScreen = ({ navigation }) => {
 
   //
+  const thread = navigation.getParam('id');
   const { state, deleteMessage, getMessages } = useContext(Context);
 
   useEffect(() => {
-    getMessages();
+    getMessages(thread);
 
     const listener = navigation.addListener('didFocus', () => {
-      getMessages();
+      getMessages(thread);
     });
 
     return () => {
       listener.remove();
     };
   }, [])
-
+  
   return (
     <View>
       <FlatList
         data={state}
-        keyExtractor={thread => thread.id}
+        keyExtractor={message => message.id}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
@@ -57,7 +58,7 @@ const IndexMessageScreen = ({ navigation }) => {
   );
 };
 
-IndexMessageScreen.navigationOptions = ({ navigation }) => {
+ChatioChatScreen.navigationOptions = ({ navigation }) => {
   return {
     headerRight: (
       <TouchableOpacity onPress={() => navigation.navigate('CreateMessage')}>
@@ -88,4 +89,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default IndexMessageScreen;
+export default ChatioChatScreen;

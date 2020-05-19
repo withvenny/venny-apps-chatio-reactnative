@@ -62,7 +62,7 @@ const addMessage = dispatch => {
 const getMessages = dispatch => {
 
   //
-  return async () => {
+  return async (thread) => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
@@ -72,8 +72,8 @@ const getMessages = dispatch => {
       let path = '/messages?';
       path += 'token=' + 'tok_thentrlco';
       path += '&app=' + 'app_thentrlco';
-      path += '&profile=' + profile;
-      //path += '&thread='+`${thread}`;
+      //path += '&profile=' + profile;
+      path += '&thread='+`${thread}`;
       //path += '&id='+`${id}`;
       //path += '&body='+`${body}`;
       //path += '&images='+ JSON.stringify(images);
@@ -88,7 +88,9 @@ const getMessages = dispatch => {
       console.log(response.data.data);
   
       dispatch({ type: 'get_messages', payload: response.data.data });
-  };
+
+   };
+
 };
   
 // Message UPDATE

@@ -6,20 +6,20 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import { Context } from 'src/context/MessageContext';
+import { Context } from 'src/context/ThreadContext';
 import { Feather } from '@expo/vector-icons';
 
 //
-const IndexMessageScreen = ({ navigation }) => {
-
+const ChatioChatsScreen = ({ navigation }) => {
+  
   //
-  const { state, deleteMessage, getMessages } = useContext(Context);
+  const { state, deleteThread, getThreads } = useContext(Context);
 
   useEffect(() => {
-    getMessages();
+    getThreads();
 
     const listener = navigation.addListener('didFocus', () => {
-      getMessages();
+      getThreads();
     });
 
     return () => {
@@ -34,20 +34,12 @@ const IndexMessageScreen = ({ navigation }) => {
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('ShowMessage', { id: item.id })}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate('Chat', { id: item.id })}>
               <View style={styles.row}>
-                <Text style={styles.body}>
-                ID: {item.id},
-                Thread: {item.thread},
-                Body: {item.body},
-                Deleted: {item.deleted},
-                Profile: {item.profile}
-                </Text>
-                <TouchableOpacity onPress={() => deleteMessage(item.id)}>
-                  <Feather style={styles.icon} name="trash" />
-                </TouchableOpacity>
+              <View><Text style={styles.body}>ID: {item.id}</Text></View>
+              <View><Text style={styles.body}>Preview: {item.preview}</Text></View>
+              <View><Text style={styles.body}>Title: {item.title}</Text></View>
+              <View><Text style={styles.body}>Contributors: {item.participants.contributors.toString()}</Text></View>
               </View>
             </TouchableOpacity>
           );
@@ -57,10 +49,10 @@ const IndexMessageScreen = ({ navigation }) => {
   );
 };
 
-IndexMessageScreen.navigationOptions = ({ navigation }) => {
+ChatioChatsScreen.navigationOptions = ({ navigation }) => {
   return {
     headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate('CreateMessage')}>
+      <TouchableOpacity onPress={() => navigation.navigate('CreateThread')}>
         <Feather name="plus" size={30} />
       </TouchableOpacity>
     )
@@ -88,4 +80,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default IndexMessageScreen;
+export default ChatioChatsScreen;
