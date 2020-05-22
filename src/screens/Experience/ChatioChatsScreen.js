@@ -52,7 +52,7 @@ const ChatioChatsScreen = ({ navigation }) => {
 ChatioChatsScreen.navigationOptions = ({ navigation }) => {
   return {
     headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate('CreateThread')}>
+      <TouchableOpacity onPress={() => navigation.navigate('People')}>
         <Feather name="plus" size={30} />
       </TouchableOpacity>
     )
