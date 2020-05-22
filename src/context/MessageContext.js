@@ -161,9 +161,62 @@ const deleteMessage = dispatch => {
   };
 };
 
+// Message COMPOSE
+const composeMessage = dispatch => {
+  
+  //
+  return async (body,contributors,callback) => {
+
+    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    var profile = await AsyncStorage.getItem('profile');
+    Alert.alert("MessageContext.token.composeMessage: " + profile);
+
+    //
+    var participants = {"blocked":[]};
+
+    //
+    participants.administrators = [`${profile}`];
+    //participants.administrators.push(administrators);
+
+    //
+    participants.contributors = [`${profile}`];
+    participants.contributors.push(contributors);
+
+    //Result:
+    console.log("MessageContext.composeMessage.participants." + JSON.stringify(participants));
+    console.log("MessageContext.composeMessage.participants.contributors." + contributors);
+    
+      //
+      let path = '/compose?';
+      path += 'token=' + 'tkn_thentrlco';
+      path += '&app=' + 'app_thentrlco';
+      path += '&profile=' + profile;
+      //path += '&thread=' + `${thread}`;
+      //path += '&id=' + `${id}`;
+      path += '&body=' + `${body}`;
+      path += '&participants='+ JSON.stringify(participants);
+      //path += '&images=' + JSON.stringify(images);
+      //path += '&deleted=' + `${deleted}`;
+
+      //
+      console.log("path: " + path);
+  
+      //
+      const response = await api.post(path);
+  
+      console.log(response);
+  
+      if (callback) {
+      callback();
+      }
+  };
+};
+
+
 //
 export const { Context, Provider } = createDataContext(
   messageReducer, {
+    composeMessage,
     addMessage,
     deleteMessage,
     editMessage,

@@ -52,6 +52,11 @@ import ResultsShowScreen from './src/screens/ResultsShowScreen';
 // CHATS
 import ChatScreen from './src/screens/Experience/ChatioChatScreen';
 import ChatsScreen from './src/screens/Experience/ChatioChatsScreen';
+import ComposeScreen from './src/screens/Experience/ChatioComposeScreen';
+
+// PEOPLE
+import ProfileScreen from './src/screens/Experience/ChatioProfileScreen';
+import PeopleScreen from './src/screens/Experience/ChatioPeopleScreen';
 
 //
 import { Provider as AuthProvider } from './src/context/AuthContext';
@@ -61,7 +66,6 @@ import { Provider as ThreadProvider } from './src/context/ThreadContext';
 import { Provider as MessageProvider } from './src/context/MessageContext';
 import { setNavigator } from 'src/navigationRef';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
-
 
 //
 const navigator = createStackNavigator({
@@ -138,22 +142,18 @@ const chatStack = createStackNavigator({
 
   //
   Chats: ChatsScreen,
-  Chat: ChatScreen
+  Chat: ChatScreen,
+  Compose: ComposeScreen,
+  Profile: ProfileScreen,
 
 });
 
 // PEOPLE
 const peopleStack = createStackNavigator({
 
-  IndexFollowship: IndexFollowshipScreen,
-  ShowFollowship: ShowFollowshipScreen,
-  CreateFollowship: CreateFollowshipScreen,
-  EditFollowship: EditFollowshipScreen,
-
-  IndexProfile: IndexProfileScreen,
-  ShowProfile: ShowProfileScreen,
-  CreateProfile: CreateProfileScreen,
-  EditProfile: EditProfileScreen,
+  People: PeopleScreen,
+  Profile: ProfileScreen,
+  Compose: ComposeScreen,
 
 });
 
