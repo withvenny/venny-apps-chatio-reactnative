@@ -103,6 +103,20 @@ export default {
     justifyContent: 'center',
     marginBottom: 250
   },
+  welcomeContainer: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  welcomeImage: {
+      flex: 1,
+      resizeMode: "cover",
+      justifyContent: "center"
+  },
+  welcomeText: {
+      color: "grey",
+      fontSize: 30,
+      fontWeight: "bold"
+  },
   etDark: {
     ...tvDefault,
     width:"100%",

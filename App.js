@@ -201,12 +201,15 @@ discoverStack.navigationOptions = { title: 'Discover', tabBarIcon: <FontAwesome 
 inboxStack.navigationOptions = { title: 'Inbox', tabBarIcon: <FontAwesome name="comments" size={20} /> };
 profileStack.navigationOptions = { title: 'Me', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
+onboardingStack.navigationOptions = { header: null, title: 'onboarding', tabBarIcon: <FontAwesome name="users" size={20} /> };
+
 chatStack.navigationOptions = { title: 'Chats', tabBarIcon: <FontAwesome name="comments" size={20} /> };
 peopleStack.navigationOptions = { title: 'People', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
 //
 WelcomeScreen.navigationOptions = {
   title: 'Welcome',
+  header: null,
   tabBarIcon: <FontAwesome name="th-list" size={20} />
 };
 
