@@ -36,10 +36,10 @@ const ChatioChatsScreen = ({ navigation }) => {
           return (
             <TouchableOpacity onPress={() => navigation.navigate('Chat', { id: item.id })}>
               <View style={styles.row}>
-              <View><Text style={styles.body}>ID: {item.id}</Text></View>
-              <View><Text style={styles.body}>Preview: {item.preview}</Text></View>
-              <View><Text style={styles.body}>Title: {item.title}</Text></View>
-              <View><Text style={styles.body}>Contributors: {item.participants.contributors.toString()}</Text></View>
+                <View><Text style={styles.body}>ID: {item.id}</Text></View>
+                <View><Text style={styles.body}>Preview: {item.preview}</Text></View>
+                <View><Text style={styles.body}>Title: {item.title}</Text></View>
+                <View><Text style={styles.body}>Contributors: {item.participants.contributors.toString()}</Text></View>
               </View>
             </TouchableOpacity>
           );

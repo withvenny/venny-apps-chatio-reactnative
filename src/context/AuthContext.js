@@ -1,8 +1,12 @@
+//
 import { AsyncStorage,Alert } from 'react-native';
+
+//
 import createDataContext from 'src/context/createDataContext';
 import api from 'src/api';
 import { navigate } from 'src/navigationRef';
 
+//
 const authReducer = (state, action) => {
   switch (action.type) {
     case 'add_error':
@@ -18,16 +22,18 @@ const authReducer = (state, action) => {
   }
 };
 
+//
 const tryLocalSignin = dispatch => async () => {
   const token = await AsyncStorage.getItem('token');
   if (token) {
     dispatch({ type: 'signin', payload: token });
     navigate('experienceFlow');
   } else {
-    navigate('SignUp');
+    navigate('Welcome');
   }
 };
 
+//
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' });
 };
@@ -101,6 +107,7 @@ const signin = dispatch => async ({ email, password }) => {
   }
 };
 
+//
 const signout = dispatch => async () => {
   await AsyncStorage.removeItem('token');
   dispatch({ type: 'signout' });
@@ -108,6 +115,7 @@ const signout = dispatch => async () => {
   navigate('ResolveAuth');
 };
 
+//
 export const { Provider, Context } = createDataContext(
   authReducer,
   { signin, signout, signup, clearErrorMessage, tryLocalSignin },

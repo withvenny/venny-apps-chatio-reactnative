@@ -7,9 +7,12 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { FontAwesome } from '@expo/vector-icons';
 
 // ONBOARDING
-import SignInScreen from './src/screens/SignInScreen';
-import SignUpScreen from './src/screens/SignUpScreen';
-import AccountScreen from './src/screens/AccountScreen';
+//import SignInScreen from './src/screens/SignInScreen';
+//import SignUpScreen from './src/screens/SignUpScreen';
+import SignInScreen from 'src/screens/Experience/ChatioSignInScreen';
+import SignUpScreen from 'src/screens/Experience/ChatioSignUpScreen';
+import WelcomeScreen from 'src/screens/Experience/ChatioWelcomeScreen';
+import AccountScreen from 'src/screens/AccountScreen';
 
 // LEGACY
 import IndexScreen from './src/screens/IndexScreen';
@@ -65,7 +68,7 @@ import { Provider as ProfileProvider } from './src/context/ProfileContext';
 import { Provider as ThreadProvider } from './src/context/ThreadContext';
 import { Provider as MessageProvider } from './src/context/MessageContext';
 import { setNavigator } from 'src/navigationRef';
-import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
+import ResolveAuthScreen from 'src/screens/ResolveAuthScreen';
 
 //
 const navigator = createStackNavigator({
@@ -108,6 +111,7 @@ const navigator = createStackNavigator({
 
 //
 const onboardingStack = createStackNavigator({
+  Welcome: WelcomeScreen,
   SignIn: SignInScreen,
   SignUp: SignUpScreen,
 });
@@ -144,6 +148,7 @@ const chatStack = createStackNavigator({
   Chats: ChatsScreen,
   Chat: ChatScreen,
   Compose: ComposeScreen,
+  People: PeopleScreen,
   Profile: ProfileScreen,
 
 });
@@ -200,7 +205,7 @@ chatStack.navigationOptions = { title: 'Chats', tabBarIcon: <FontAwesome name="c
 peopleStack.navigationOptions = { title: 'People', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
 //
-SignUpScreen.navigationOptions = {
+WelcomeScreen.navigationOptions = {
   title: 'Welcome',
   tabBarIcon: <FontAwesome name="th-list" size={20} />
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, Button, Input } from 'react-native-elements';
 import Spacer from 'src/components/Spacer';
+import styles from 'src/values/styles';
 
 const SignUpForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
   const [email, setEmail] = useState('');
@@ -38,7 +39,7 @@ const SignUpForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) =>
         autoCorrect={false}
       />
       {errorMessage ? (
-        <Text style={styles.errorMessage}>{errorMessage}</Text>
+        <Text style={[styles.errorMessage]}>{errorMessage}</Text>
       ) : null}
       <Spacer>
         <Button
@@ -49,14 +50,5 @@ const SignUpForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) =>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  errorMessage: {
-    fontSize: 16,
-    color: 'red',
-    marginLeft: 15,
-    marginTop: 15
-  }
-});
 
 export default SignUpForm;
