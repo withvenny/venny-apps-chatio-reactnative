@@ -145,6 +145,7 @@ const inboxStack = createStackNavigator({
 const chatStack = createStackNavigator({
 
   //
+  Account: AccountScreen,
   Chats: ChatsScreen,
   Chat: ChatScreen,
   Compose: ComposeScreen,
@@ -156,6 +157,7 @@ const chatStack = createStackNavigator({
 // PEOPLE
 const peopleStack = createStackNavigator({
 
+  Account: AccountScreen,
   People: PeopleScreen,
   Profile: ProfileScreen,
   Compose: ComposeScreen,
