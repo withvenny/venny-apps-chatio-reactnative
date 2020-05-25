@@ -112,8 +112,8 @@ const navigator = createStackNavigator({
 //
 const onboardingStack = createStackNavigator({
   Welcome: WelcomeScreen,
-  SignIn: SignInScreen,
   SignUp: SignUpScreen,
+  SignIn: SignInScreen,
 });
 
 //

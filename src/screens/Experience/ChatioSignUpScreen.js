@@ -1,12 +1,11 @@
 //
 import React, { useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
 //
 import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from 'src/context/AuthContext';
 import SignUpForm from 'src/components/SignUpForm';
-import NavLink from 'src/components/NavLink';
 import styles from "src/values/styles";
 
 //
@@ -24,18 +23,11 @@ const SignUpScreen = ({ navigation }) => {
         submitButtonText="Sign Up"
         onSubmit={signup}
       />
-      <NavLink
-        routeName="SignIn"
-        text="Already have an account? Sign in instead!"
-      />
     </View>
   );
 };
 
-SignUpScreen.navigationOptions = () => {
-  return {
-    header: null
-  };
+SignUpScreen.navigationOptions = {
 };
 
 export default SignUpScreen;

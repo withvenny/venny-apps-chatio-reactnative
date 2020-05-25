@@ -1,6 +1,15 @@
 import { default as Colors, default as colors } from "src/values/colors";
 import { default as dimens, width } from "src/values/dimensions";
 
+export const tvDefault = {
+  color: Colors.textPrimary,
+  fontSize: dimens.tvNormalDefault
+};
+
+export const tvDefaultBold = {
+  ...tvDefault,
+};
+
 const viewParentBase = {
   flex: 1,
   backgroundColor: colors.background,
@@ -9,6 +18,46 @@ const viewParentBase = {
 const viewBase = { backgroundColor: Colors.linesPrimary };
 
 export default {
+  tvVerySmall: {
+    ...tvDefault,
+    fontSize: dimens.tvVerySmall
+  },
+  tvVerySmallBold: {
+    ...tvDefaultBold,
+    fontSize: dimens.tvVerySmall
+  },
+  tvSmall: {
+    ...tvDefault,
+    fontSize: dimens.tvSmall
+  },
+  tvSmallBold: {
+    ...tvDefaultBold,
+    fontSize: dimens.tvSmall
+  },
+  tvNormal: {
+    ...tvDefault,
+    fontSize: dimens.tvNormal
+  },
+  tvNormalBold: {
+    ...tvDefaultBold,
+    fontSize: dimens.tvNormal
+  },
+  tvLarge: {
+    ...tvDefault,
+    fontSize: dimens.tvLarge
+  },
+    tvLargeBold: {
+    ...tvDefaultBold,
+    fontSize: dimens.tvLarge
+  },
+  tvVeryLarge: {
+    ...tvDefault,
+    fontSize: dimens.tvVeryLarge
+  },
+  tvVeryLargeBold: {
+    ...tvDefaultBold,
+    fontSize: dimens.tvVeryLarge
+  },
   viewHorizontal: {
     ...viewBase,
     width: "100%",
@@ -38,13 +87,10 @@ export default {
   toolbar: {
     backgroundColor: Colors.primary
   },
-
-  //
-  chatio: {
-    //borderColor: 'red',
-    //borderWidth: 1,
+  etLight: {
+    ...tvDefault,
+    padding: dimens.space_small
   },
-
   //
   errorMessage: {
     fontSize: 16,
@@ -70,6 +116,18 @@ export default {
       color: "grey",
       fontSize: 30,
       fontWeight: "bold"
+  },
+  etDark: {
+    ...tvDefault,
+    width:"100%",
+    textAlign:'center',
+    padding: dimens.space_small
+  },
+  etDarkNew: {
+    ...tvDefault,
+    width:"70%",
+    textAlign:'center',
+    padding: dimens.space_small
   },
   ivBig: {
     width: dimens.ivBig,
@@ -114,6 +172,11 @@ export default {
     padding: width(5),
     height: '100%',
     justifyContent: "flex-end"
+  },
+
+  listTitle: {
+    ...this.tvLargeDefault,
+    color: colors.red
   },
 
   buttonMenuView: {
