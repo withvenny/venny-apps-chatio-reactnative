@@ -26,8 +26,9 @@ const SignInForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) =>
             </Spacer>
 
             <Input
-                label="Email"
-                placeholder="Email placeholder..."
+                label="EMAIL"
+                labelStyle={[styles.chatio]}
+                placeholder="Email..."
                 underlineColorAndroid='transparent'
                 value={email}
                 keyboardType={'email-address'}
@@ -36,18 +37,23 @@ const SignInForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) =>
                 autoCompleteType = "off"
                 autoCorrect={false}
                 required
+                style={[styles.chatio]}
             />
 
             <Spacer />
 
             <Input
                 secureTextEntry
-                label="Password"
+                placeholder="Password..."
+                label="PASSWORD"
+                labelStyle={[styles.chatio]}
                 value={password}
                 onChangeText={setPassword}
                 autoCapitalize="none"
                 autoCorrect={false}
                 required
+                labelStyle={[styles.chatio]}
+                style={[styles.chatio]}
             />
 
             {errorMessage ? (
@@ -56,8 +62,8 @@ const SignInForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) =>
 
             <Spacer>
                 <Button
-                title={submitButtonText}
-                onPress={() => onSubmit({ email, password })}
+                    title={submitButtonText}
+                    onPress={() => onSubmit({ email, password })}
                 />
             </Spacer>
 

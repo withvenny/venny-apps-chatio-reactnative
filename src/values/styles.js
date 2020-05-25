@@ -41,8 +41,8 @@ export default {
 
   //
   chatio: {
-    //borderColor: 'red',
-    //borderWidth: 1,
+    borderColor: 'red',
+    borderWidth: 1,
   },
 
   //
