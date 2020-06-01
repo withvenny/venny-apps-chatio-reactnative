@@ -165,7 +165,7 @@ const deleteMessage = dispatch => {
 const composeMessage = dispatch => {
   
   //
-  return async (body,contributors,callback) => {
+  return async (body,contributors,thread,callback) => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
@@ -191,7 +191,7 @@ const composeMessage = dispatch => {
       path += 'token=' + 'tkn_thentrlco';
       path += '&app=' + 'app_thentrlco';
       path += '&profile=' + profile;
-      //path += '&thread=' + `${thread}`;
+      path += '&thread=' + `${thread}`;
       //path += '&id=' + `${id}`;
       path += '&body=' + `${body}`;
       path += '&participants='+ JSON.stringify(participants);

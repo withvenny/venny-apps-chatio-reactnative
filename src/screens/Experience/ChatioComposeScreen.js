@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import { StyleSheet } from 'react-native';
 import { Context as MessageProvider } from 'src/context/MessageContext';
-import ComposeForm from 'src/components/ComposeForm';
+import ComposeBar from 'src/components/ComposeBar';
 
 //
 const ChatioComposeScreen = ({ navigation }) => {
@@ -14,18 +13,17 @@ const ChatioComposeScreen = ({ navigation }) => {
   const { composeMessage } = useContext(MessageProvider);
 
   return (
-    <ComposeForm
+    <ComposeBar
       initialValues={{
         body: '',
         contributors: contributors,
+        contributors: thread,
       }}
       onSubmit={(body,contributors) => {
-        composeMessage(body,contributors,() => navigation.navigate('People'));
+        composeMessage(body,contributors,() => navigation.navigate('Chat'));
       }}
     />
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default ChatioComposeScreen;

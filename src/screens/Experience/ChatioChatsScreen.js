@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Context } from 'src/context/ThreadContext';
 import { Feather } from '@expo/vector-icons';
+import moment from 'moment';
 
 //
 const ChatioChatsScreen = ({ navigation }) => {
@@ -15,9 +16,14 @@ const ChatioChatsScreen = ({ navigation }) => {
   //
   const { state, deleteThread, getThreads } = useContext(Context);
 
+  //
   useEffect(() => {
+
+
+    //
     getThreads();
 
+    //
     const listener = navigation.addListener('didFocus', () => {
       getThreads();
     });
@@ -34,13 +40,15 @@ const ChatioChatsScreen = ({ navigation }) => {
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate('Chat', { id: item.id })}>
+            <TouchableOpacity onPress={() => navigation.navigate('Chat', { id: item.id, contributors: item.participants.contributors })}>
               <View style={styles.row}>
                 <View><Text style={styles.body}>ID: {item.id}</Text></View>
                 <View><Text style={styles.body}>Preview: {item.preview}</Text></View>
                 <View><Text style={styles.body}>Title: {item.title}</Text></View>
                 <View><Text style={styles.body}>Contributors: {item.participants.contributors.toString()}</Text></View>
-              </View>
+                <View><Text style={styles.body}>When: {moment(item.when).fromNow()}</Text></View>
+
+            </View>            
             </TouchableOpacity>
           );
         }}

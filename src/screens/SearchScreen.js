@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import SearchBar from '../components/SearchBar';
-import useResults from '../hooks/useResults';
-import ResultsList from '../components/ResultsList';
+import SearchBar from 'src/components/SearchBar';
+import useResults from 'src/hooks/useResults';
+import ResultsList from 'src/components/ResultsList';
 
 const SearchScreen = () => {
   const [term, setTerm] = useState('');

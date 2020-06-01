@@ -6,18 +6,26 @@ const ComposeForm = ({ onSubmit, initialValues }) => {
     const [body, setBody] = useState(initialValues.body)
 
   return (
-    <View>
+    <View style={{borderWidth:1,borderColor:'green',height:45,flex:1,flexDirection:'row'}}>
 
-        <Text style={styles.label}>Enter body:</Text>
+<View style={{padding:5,height:45,flex:1,flexDirection:'row',borderWidth:1,borderRadius:10,borderColor:'green'}}>
+
+<View style={{height:40,borderWidth:1,flex:4,borderColor:'red'}}>
         <TextInput
-          style={styles.input}
+          style={[styles.input]}
           value={body}
+          autoCorrect={true}
           autoCapitalize='none'
           placeholder={'Enter the index to scroll'}
           onChangeText={text => setBody(text)}
         />
+        </View>
 
-      <Button title="Save Message" onPress={() => onSubmit(body,initialValues.contributors)} />
+      <View style={{width:80,height:40,flex:1,borderWidth:1,borderColor:'red'}}>
+        <Button title="Send" onPress={() => onSubmit(body,initialValues.contributors)} />
+      </View>
+
+      </View>
 
     </View>
   );
@@ -34,9 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderWidth: 1,
     borderColor: 'black',
-    marginBottom: 15,
-    padding: 5,
-    margin: 5
+    height:40,
   },
   label: {
     fontSize: 20,

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useRoute } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -104,7 +104,7 @@ const navigator = createStackNavigator({
 
   initialRouteName: 'Home',
   defaultNavigationOptions: {
-  title: 'The NTRL Co.'
+  title: 'Chatio'
 
   }
 });
@@ -145,22 +145,22 @@ const inboxStack = createStackNavigator({
 const chatStack = createStackNavigator({
 
   //
-  Account: AccountScreen,
   Chats: ChatsScreen,
   Chat: ChatScreen,
   Compose: ComposeScreen,
   People: PeopleScreen,
   Profile: ProfileScreen,
+  Account: AccountScreen,
 
 });
 
 // PEOPLE
 const peopleStack = createStackNavigator({
 
-  Account: AccountScreen,
   People: PeopleScreen,
   Profile: ProfileScreen,
   Compose: ComposeScreen,
+  Account: AccountScreen,
 
 });
 
@@ -205,7 +205,7 @@ profileStack.navigationOptions = { title: 'Me', tabBarIcon: <FontAwesome name="u
 
 onboardingStack.navigationOptions = { header: null, title: 'onboarding', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
-chatStack.navigationOptions = { title: 'Chats', tabBarIcon: <FontAwesome name="comments" size={20} /> };
+chatStack.navigationOptions = { tabBarVisible: false, title: 'Chats', tabBarIcon: <FontAwesome name="comments" size={20} /> };
 peopleStack.navigationOptions = { title: 'People', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
 //
