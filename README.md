@@ -8,7 +8,7 @@ Using React Native (via Expo) and the Venny I/O APIs we'll explore a mobile expe
 
 # Preview
 
-<img src="https://github.com/withvenny/venny-apis-identity-php/blob/master/venny-apps-chatio-reactnative.gif">
+![](https://media.giphy.com/media/jQVmUlNEHmcrcJaPD7/giphy.gif)
 
 ## Venny I/O APIs
 This app leverages the Venny I/O APIs to for core functionality. Using the API out of the box communicates directly with the Venny I/O API. You will need an API token in order to make successful calls.
