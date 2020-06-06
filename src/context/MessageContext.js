@@ -31,7 +31,7 @@ const addMessage = dispatch => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for addMessage: " + profile);
+    //Alert.alert("New token set for addMessage: " + profile);
     
       //
       let path = '/messages?';
@@ -66,7 +66,7 @@ const getMessages = dispatch => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for getMessages: " + profile);
+    //Alert.alert("New token set for getMessages: " + profile);
   
       //
       let path = '/messages?';
@@ -101,7 +101,7 @@ const editMessage = dispatch => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for editMessage: " + profile);
+    //Alert.alert("New token set for editMessage: " + profile);
 
       //
       let path = '/messages?';
@@ -137,7 +137,7 @@ const deleteMessage = dispatch => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for deleteMessage: " + profile);
+    //Alert.alert("New token set for deleteMessage: " + profile);
   
       //
       let path = '/messages?';
@@ -169,7 +169,7 @@ const composeMessage = dispatch => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("MessageContext.token.composeMessage: " + profile);
+    //Alert.alert("MessageContext.token.composeMessage: " + profile);
 
     //
     var participants = {"blocked":[]};
@@ -211,7 +211,6 @@ const composeMessage = dispatch => {
       }
   };
 };
-
 
 //
 export const { Context, Provider } = createDataContext(
