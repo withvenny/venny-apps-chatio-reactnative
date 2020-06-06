@@ -6,7 +6,7 @@ import { View } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from 'src/context/AuthContext';
 import SignInForm from 'src/components/SignInForm';
-import styles from "src/values/styles";
+import styles from 'src/values/styles';
 
 //
 const SignInScreen = ({ navigation }) => {

@@ -19,7 +19,7 @@ export default class Messages extends React.Component {
     headerTintColor: 'rgb(0,122,255)',
   })
 
-  state = {
+  state = { . 
     messages: [],
     keyboardPadding: new Animated.Value(0)
   }

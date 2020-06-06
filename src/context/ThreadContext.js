@@ -31,7 +31,7 @@ const getThreads = dispatch => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for getThreads: " + profile);  
+    //Alert.alert("New token set for getThreads: " + profile);  
   
       //
       let path = '/threads?';

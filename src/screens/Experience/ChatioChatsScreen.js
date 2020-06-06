@@ -9,6 +9,7 @@ import {
 import { Context } from 'src/context/ThreadContext';
 import { Feather } from '@expo/vector-icons';
 import moment from 'moment';
+import styles from 'src/values/styles';
 
 //
 const ChatioChatsScreen = ({ navigation }) => {
@@ -19,7 +20,6 @@ const ChatioChatsScreen = ({ navigation }) => {
   //
   useEffect(() => {
 
-
     //
     getThreads();
 
@@ -28,64 +28,83 @@ const ChatioChatsScreen = ({ navigation }) => {
       getThreads();
     });
 
+    //
     return () => {
+
       listener.remove();
+
     };
+
   }, [])
 
   return (
-    <View>
+
+    <View style={{flex:1,flexDirection:'row'}}>
+    
       <FlatList
+
         data={state}
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
-          return (
-            <TouchableOpacity onPress={() => navigation.navigate('Chat', { id: item.id, contributors: item.participants.contributors })}>
-              <View style={styles.row}>
-                <View><Text style={styles.body}>ID: {item.id}</Text></View>
-                <View><Text style={styles.body}>Preview: {item.preview}</Text></View>
-                <View><Text style={styles.body}>Title: {item.title}</Text></View>
-                <View><Text style={styles.body}>Contributors: {item.participants.contributors.toString()}</Text></View>
-                <View><Text style={styles.body}>When: {moment(item.when).fromNow()}</Text></View>
 
-            </View>            
-            </TouchableOpacity>
+          return (
+            
+            <View style={{flex:1,height:78}}>
+              
+              <TouchableOpacity style={{flex:1,flexDirection:'row',borderColor:'blue',borderWidth:2}} onPress={() => navigation.navigate('Chat', { id: item.id, contributors: item.participants.contributors })}>
+                
+                <View style={{flex:1,borderColor:'green',borderWidth:1}}>
+                  
+                  <Text>
+                    [image]
+                  </Text>
+
+                </View>
+                
+                <View style={{flex:4,borderColor:'red',borderWidth:1,flexDirection:'column'}}>
+
+                  <View style={{flex:1,borderColor:'pink',borderWidth:1,justifyContent:'flex-end'}}>
+
+                    <Text>
+                      Contributors: {item.participants.contributors.toString()}
+                    </Text>
+
+                  </View>
+
+                  <View style={{flex:1,borderColor:'lime',borderWidth:1,justifyContent:'flex-start'}}>
+
+                    <Text>
+                      Preview: {item.preview} • {moment(item.when).fromNow()}
+                    </Text>
+
+                  </View>
+
+                </View>            
+
+              </TouchableOpacity>
+
+            </View>
+
           );
+
         }}
+      
       />
+
     </View>
+
   );
+
 };
 
 ChatioChatsScreen.navigationOptions = ({ navigation }) => {
   return {
-    headerRight: (
+    headerLeft: (
       <TouchableOpacity onPress={() => navigation.navigate('People')}>
         <Feather name="plus" size={30} />
       </TouchableOpacity>
     )
   };
 };
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-    borderTopWidth: 1,
-    borderColor: 'gray'
-  },
-  body: {
-    fontSize: 18
-  },
-  icon: {
-    fontSize: 24
-  },
-  littleStyle: {
-    fontSize: 30,
-    textDecorationLine: 'underline',
-  }
-});
 
 export default ChatioChatsScreen;

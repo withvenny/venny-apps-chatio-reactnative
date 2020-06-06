@@ -1,6 +1,35 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Button, Text } from 'react-native';
+import {
+  Button,
+  KeyboardAvoidingView,
+  NativeModules,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Dimensions,
+} from 'react-native';
 import { Feather } from '@expo/vector-icons';
+
+const { StatusBarManager } = NativeModules;
+
+let statusBarHeight = 0;
+if (Platform.OS === 'ios') {
+  StatusBarManager.getHeight((statusBarFrameData) => {
+    statusBarHeight = statusBarFrameData.height;
+  });
+}
+
+// Could be nav bar height?
+// Magic number but is necessary to work properly
+const IOS_OFFSET = 44;
+
+
+const getVerticalOffset = () => Platform.select({
+  ios: statusBarHeight + IOS_OFFSET,
+  android: 0
+});
 
 // ADD MORE NAVIGATION VALUES 
 const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
@@ -11,11 +40,13 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
     console.log("ComposeBar/contributors/"+contributors);
 
     return (
-        <View>
-
-        <View>
-        
-        <View>
+      <KeyboardAvoidingView
+        style={{position:'absolute',bottom:0,width:'100%',alignItems:'center',backgroundColor:'grey'}}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={getVerticalOffset()}
+      >
+                <View>
+                
                 <TextInput
                   value={body}
                   autoCorrect={true}
@@ -28,10 +59,9 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
               <View>
                 <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
               </View>
+
         
-              </View>
-        
-            </View>
+              </KeyboardAvoidingView>
     );
 };
 

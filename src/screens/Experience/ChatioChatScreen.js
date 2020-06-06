@@ -1,14 +1,19 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
+  Animated,
+  Dimensions,
   FlatList,
+  Keyboard,
+  KeyboardAvoidingView,
+  NativeModules,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  ScrollView
+  View,
 } from 'react-native';
 
 import { Context } from 'src/context/MessageContext';
@@ -32,21 +37,30 @@ const ChatioChatScreen = ({ navigation }) => {
 
     getMessages(thread);
 
+    //
     const listener = navigation.addListener('didFocus', () => {
+
+      //
       getMessages(thread);
+
     });
 
+    //
     return () => {
+
+      //
       listener.remove();
+
     };
+
   }, [])
   
   //
   return (
 
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{flex:1,backgroundColor:'rgb(0,0,0)'}}>
 
-      <KeyboardAvoidingView style={{flex:1}} behavior="padding">
+      <KeyboardAvoidingView style={{flex:1,backgroundColor:'rgb(0,255,0)'}} behavior="padding">
 
         <FlatList
           data = { state }
@@ -76,6 +90,7 @@ const ChatioChatScreen = ({ navigation }) => {
         />
 
         <ComposeBar
+
           style={{justifySelf: 'flex-end',height: 40, width: '100%'}}
           contributors={contributors}
           thread={thread}
@@ -87,6 +102,7 @@ const ChatioChatScreen = ({ navigation }) => {
               () => navigation.jumpTo('Chat', { id: thread, contributors: contributors })
             );
           }}
+
         />
 
       </KeyboardAvoidingView>
