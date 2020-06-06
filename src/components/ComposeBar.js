@@ -59,23 +59,24 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={getVerticalOffset()}
     >
-      <View style={{width:'80%',borderWidth:1,borderColor:'red'}}>
+      <View style={{position:'absolute',left:0,width:'80%'}}>
 
         <TextInput
           value={body}
           autoCorrect={true}
           autoCapitalize='none'
-          placeholder={'Send message...'}
+          placeholder={'Enter the index to scroll'}
           onChangeText={text => setBody(text)}
         />
 
       </View>
 
-      <View style={{width:'20%',borderWidth:1,borderColor:'blue'}}>
+      <View style={{position:'absolute',right:0,height:50,width:'20%'}}>
 
         <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
 
       </View>
+
 
     </KeyboardAvoidingView>
 
