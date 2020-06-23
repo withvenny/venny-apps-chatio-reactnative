@@ -23,7 +23,8 @@ if (Platform.OS === 'ios') {
 
 // Could be nav bar height?
 // Magic number but is necessary to work properly
-const IOS_OFFSET = 44;
+//const IOS_OFFSET = 44;
+const IOS_OFFSET = 80;
 
 
 const getVerticalOffset = () => Platform.select({
@@ -37,7 +38,7 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
     const [body, setBody] = useState(initialValues.body);
 
     console.log("ComposeBar/thread/"+thread);
-    console.log("ComposeBar/contributors/"+contributors);
+    console.log("ComposeBar/contributors/"+JSON.stringify(contributors));
 
     return (
       <KeyboardAvoidingView

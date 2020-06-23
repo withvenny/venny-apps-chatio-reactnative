@@ -9,6 +9,8 @@ import {
 //
 import api from 'src/api';
 
+import { navigate } from 'src/navigationRef';
+
 //
 const threadReducer = (state, action) => {
 
@@ -199,7 +201,7 @@ const findThread = dispatch => async ({ contributors }) => {
 
   console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
   var profile = await AsyncStorage.getItem('profile');
-  Alert.alert("New token set for addThread: " + profile);
+  Alert.alert("New token set for findThread: " + profile);
 
   //
   var participants = {"blocked":[]};
@@ -212,7 +214,7 @@ const findThread = dispatch => async ({ contributors }) => {
   participants.contributors.push(contributors);
 
   //Result:
-  console.log(participants);
+  console.log(JSON.stringify(participants));
 
   //
   let path = '/threads?';
@@ -227,23 +229,28 @@ const findThread = dispatch => async ({ contributors }) => {
 
   //
   console.log("path: "+path);
+  Alert.alert(path);
 
+  /*
   try {
+    */
 
     //
     const response = await api.post(path);
 
-    console.log(response);
+    console.log("//ThreadContext/findThread/"+JSON.stringify(response.data.data[0].id));
+    Alert.alert(JSON.stringify(response.data.data[0].id));
 
     //
     dispatch({
       type: 'findThread',
-      payload: response.data.data.thread[0].id
+      payload: response.data.data[0].id
     });
 
     //
-    navigate('Chat', { id: response.data.data.thread[0].id });
+    navigate('Chat', { id: response.data.data[0].id });
   
+    /*
   } catch (err) {
 
     //
@@ -252,7 +259,7 @@ const findThread = dispatch => async ({ contributors }) => {
       payload: 'Something went wrong with new thread'
     });
 
-  }
+  }*/
 
 };
 

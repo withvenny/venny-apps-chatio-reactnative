@@ -15,19 +15,25 @@ const FindThreadForm = ({ onSubmit,item }) => {
     //
     return (
     
-        <>
+        <View style={{height:40}}>
 
             <TouchableOpacity
+              style={{
+                height:40,
+                flex:1,
+                borderWidth:1,
+                borderColor:'red'
+              }}
               onPress={() => onSubmit({ contributors: item.id })}
             >
               <View style={styles.row}>
                 <Text>
-                    ({item.id}) {item.name_last}, {item.name_first}
+                    ({item.id}) {item.name_last}, {item.name_first} as "{item.alias}"
                 </Text>
               </View>
             </TouchableOpacity>
 
-        </>
+        </View>
 
     );
 

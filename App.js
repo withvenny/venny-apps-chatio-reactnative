@@ -194,7 +194,7 @@ const switchNavigator = createSwitchNavigator({
     //homeStack,
     //discoverStack,
     //inboxStack,
-    profileStack,
+    //profileStack,
     chatStack,
     peopleStack,
   }),
