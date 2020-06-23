@@ -8,13 +8,16 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { Context as ProfileProvider } from 'src/context/ProfileContext';
+import { Context as ThreadProvider } from 'src/context/ThreadContext';
 import { Feather } from '@expo/vector-icons';
+import FindThreadForm from 'src/components/FindThreadForm';
 
 //
 const IndexProfileScreen = ({ navigation }) => {
-  
+
   //
   const { state, getProfiles } = useContext(ProfileProvider);
+  const { findThread } = useContext(ThreadProvider);
 
   useEffect(() => {
     getProfiles();
@@ -35,24 +38,13 @@ const IndexProfileScreen = ({ navigation }) => {
     <View>
       <FlatList
         data={state}
-        keyExtractor={followship => followship.id}
+        keyExtractor={ profile => profile.id }
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity
-              onPress={
-                () => navigation.navigate('Compose', { id: item.id })
-              }
-            >
-              <View style={styles.row}>
-                <Text style={styles.body}>
-                ID: {item.id},
-                Bio: {item.bio},
-                Headline: {item.headline},
-                Access: {item.access},
-                Status: {item.status}
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <FindThreadForm
+              onSubmit={findThread}
+              item={item}
+            />
           );
         }}
       />

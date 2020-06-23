@@ -4,69 +4,69 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
 //
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 // ONBOARDING
-//import SignInScreen from './src/screens/SignInScreen';
-//import SignUpScreen from './src/screens/SignUpScreen';
+//import SignInScreen from 'src/screens/SignInScreen';
+//import SignUpScreen from 'src/screens/SignUpScreen';
 import SignInScreen from 'src/screens/Experience/ChatioSignInScreen';
 import SignUpScreen from 'src/screens/Experience/ChatioSignUpScreen';
 import WelcomeScreen from 'src/screens/Experience/ChatioWelcomeScreen';
 import AccountScreen from 'src/screens/AccountScreen';
 
 // LEGACY
-import IndexScreen from './src/screens/IndexScreen';
-import ShowScreen from './src/screens/ShowScreen';
-import CreateScreen from './src/screens/CreateScreen';
-import EditScreen from './src/screens/EditScreen';
+import IndexScreen from 'src/screens/IndexScreen';
+import ShowScreen from 'src/screens/ShowScreen';
+import CreateScreen from 'src/screens/CreateScreen';
+import EditScreen from 'src/screens/EditScreen';
 
 // HOME
-import HomeScreen from './src/screens/HomeScreen';
+import HomeScreen from 'src/screens/HomeScreen';
 
 // FOLLOWSHIP
-import IndexFollowshipScreen from './src/screens/IndexFollowshipScreen';
-import ShowFollowshipScreen from './src/screens/ShowFollowshipScreen';
-import CreateFollowshipScreen from './src/screens/CreateFollowshipScreen';
-import EditFollowshipScreen from './src/screens/EditFollowshipScreen';
+import IndexFollowshipScreen from 'src/screens/IndexFollowshipScreen';
+import ShowFollowshipScreen from 'src/screens/ShowFollowshipScreen';
+import CreateFollowshipScreen from 'src/screens/CreateFollowshipScreen';
+import EditFollowshipScreen from 'src/screens/EditFollowshipScreen';
 
 // THREAD
-import IndexThreadScreen from './src/screens/IndexThreadScreen';
-import ShowThreadScreen from './src/screens/ShowThreadScreen';
-import CreateThreadScreen from './src/screens/CreateThreadScreen';
-import EditThreadScreen from './src/screens/EditThreadScreen';
+import IndexThreadScreen from 'src/screens/IndexThreadScreen';
+import ShowThreadScreen from 'src/screens/ShowThreadScreen';
+import CreateThreadScreen from 'src/screens/CreateThreadScreen';
+import EditThreadScreen from 'src/screens/EditThreadScreen';
 
 // MESSAGE
-import IndexMessageScreen from './src/screens/IndexMessageScreen';
-import ShowMessageScreen from './src/screens/ShowMessageScreen';
-import CreateMessageScreen from './src/screens/CreateMessageScreen';
-import EditMessageScreen from './src/screens/EditMessageScreen';
+import IndexMessageScreen from 'src/screens/IndexMessageScreen';
+import ShowMessageScreen from 'src/screens/ShowMessageScreen';
+import CreateMessageScreen from 'src/screens/CreateMessageScreen';
+import EditMessageScreen from 'src/screens/EditMessageScreen';
 
 // PROFILE
-import IndexProfileScreen from './src/screens/IndexProfileScreen';
-import ShowProfileScreen from './src/screens/ShowProfileScreen';
-import CreateProfileScreen from './src/screens/CreateProfileScreen';
-import EditProfileScreen from './src/screens/EditProfileScreen';
+import IndexProfileScreen from 'src/screens/IndexProfileScreen';
+import ShowProfileScreen from 'src/screens/ShowProfileScreen';
+import CreateProfileScreen from 'src/screens/CreateProfileScreen';
+import EditProfileScreen from 'src/screens/EditProfileScreen';
 
 // SEARCH
-import DiscoverScreen from './src/screens/DiscoverScreen';
-import SearchScreen from './src/screens/SearchScreen';
-import ResultsShowScreen from './src/screens/ResultsShowScreen';
+import DiscoverScreen from 'src/screens/DiscoverScreen';
+import SearchScreen from 'src/screens/SearchScreen';
+import ResultsShowScreen from 'src/screens/ResultsShowScreen';
 
 // CHATS
-import ChatScreen from './src/screens/Experience/ChatioChatScreen';
-import ChatsScreen from './src/screens/Experience/ChatioChatsScreen';
-import ComposeScreen from './src/screens/Experience/ChatioComposeScreen';
+import ChatScreen from 'src/screens/Experience/ChatioChatScreen';
+import ChatsScreen from 'src/screens/Experience/ChatioChatsScreen';
+import ComposeScreen from 'src/screens/Experience/ChatioComposeScreen';
 
 // PEOPLE
-import ProfileScreen from './src/screens/Experience/ChatioProfileScreen';
-import PeopleScreen from './src/screens/Experience/ChatioPeopleScreen';
+import ProfileScreen from 'src/screens/Experience/ChatioProfileScreen';
+import PeopleScreen from 'src/screens/Experience/ChatioPeopleScreen';
 
 //
-import { Provider as AuthProvider } from './src/context/AuthContext';
-import { Provider as FollowshipProvider } from './src/context/FollowshipContext';
-import { Provider as ProfileProvider } from './src/context/ProfileContext';
-import { Provider as ThreadProvider } from './src/context/ThreadContext';
-import { Provider as MessageProvider } from './src/context/MessageContext';
+import { Provider as AuthProvider } from 'src/context/AuthContext';
+import { Provider as FollowshipProvider } from 'src/context/FollowshipContext';
+import { Provider as ProfileProvider } from 'src/context/ProfileContext';
+import { Provider as ThreadProvider } from 'src/context/ThreadContext';
+import { Provider as MessageProvider } from 'src/context/MessageContext';
 import { setNavigator } from 'src/navigationRef';
 import ResolveAuthScreen from 'src/screens/ResolveAuthScreen';
 
@@ -160,6 +160,7 @@ const peopleStack = createStackNavigator({
   People: PeopleScreen,
   Profile: ProfileScreen,
   Compose: ComposeScreen,
+  Chat: ChatScreen,
   Account: AccountScreen,
 
 });
@@ -167,15 +168,17 @@ const peopleStack = createStackNavigator({
 //
 const profileStack = createStackNavigator({
 
-  IndexFollowship: IndexFollowshipScreen,
-  ShowFollowship: ShowFollowshipScreen,
-  CreateFollowship: CreateFollowshipScreen,
-  EditFollowship: EditFollowshipScreen,
+  People: PeopleScreen,
 
   IndexProfile: IndexProfileScreen,
   ShowProfile: ShowProfileScreen,
   CreateProfile: CreateProfileScreen,
   EditProfile: EditProfileScreen,
+
+  IndexFollowship: IndexFollowshipScreen,
+  ShowFollowship: ShowFollowshipScreen,
+  CreateFollowship: CreateFollowshipScreen,
+  EditFollowship: EditFollowshipScreen,
 
   Home: HomeScreen,
 
@@ -191,7 +194,7 @@ const switchNavigator = createSwitchNavigator({
     //homeStack,
     //discoverStack,
     //inboxStack,
-    //profileStack,
+    profileStack,
     chatStack,
     peopleStack,
   }),
@@ -201,11 +204,11 @@ const switchNavigator = createSwitchNavigator({
 homeStack.navigationOptions = { title: 'Home', tabBarIcon: <FontAwesome name="home" size={20} /> };
 discoverStack.navigationOptions = { title: 'Discover', tabBarIcon: <FontAwesome name="search" size={20} /> };
 inboxStack.navigationOptions = { title: 'Inbox', tabBarIcon: <FontAwesome name="comments" size={20} /> };
-profileStack.navigationOptions = { title: 'Me', tabBarIcon: <FontAwesome name="users" size={20} /> };
+profileStack.navigationOptions = { title: 'Me', tabBarIcon: <Ionicons name="md-person" size={20} /> };
 
 onboardingStack.navigationOptions = { header: null, title: 'onboarding', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
-chatStack.navigationOptions = { tabBarVisible: false, title: 'Chats', tabBarIcon: <FontAwesome name="comments" size={20} /> };
+chatStack.navigationOptions = { tabBarVisible: true, title: 'Chats', tabBarIcon: <FontAwesome name="comments" size={20} /> };
 peopleStack.navigationOptions = { title: 'People', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
 //

@@ -1,13 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
+  Image,
   FlatList,
-  TouchableOpacity
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import { Context } from 'src/context/ThreadContext';
 import { Feather } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons'; 
 import moment from 'moment';
 import styles from 'src/values/styles';
 
@@ -100,6 +102,16 @@ const ChatioChatsScreen = ({ navigation }) => {
 ChatioChatsScreen.navigationOptions = ({ navigation }) => {
   return {
     headerLeft: (
+     
+      <TouchableOpacity onPress={() => navigation.navigate('Profile', { id: state.id })}>
+
+        <Image
+          source={{uri : 'https://secure.gravatar.com/avatar/dbbab0050db2dbd84d4e2c844196ee0c?s=60&d=mm&r=g'}}
+          style={{ width: 40, height: 40, borderRadius: 40/2, marginLeft : 15 }}
+        />
+      </TouchableOpacity>
+    ),
+    headerRight: (
       <TouchableOpacity onPress={() => navigation.navigate('People')}>
         <Feather name="plus" size={30} />
       </TouchableOpacity>

@@ -29,7 +29,7 @@ const IndexProfileScreen = ({ navigation }) => {
   }, []);
 
   //
-  console.log("This is PROFILE STATE: " + state);
+  console.log("This is the PROFILE STATE: " + JSON.stringify(state,null, 2));
 
   return (
     <View>

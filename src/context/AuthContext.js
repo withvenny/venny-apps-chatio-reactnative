@@ -97,14 +97,25 @@ const signin = dispatch => async ({ email, password }) => {
 
     Alert.alert("New token set: " + profile);
 
-    dispatch({ type: 'signin', payload: response.data.data.profile[0].id });
+    //
+    dispatch({
+      type: 'signin',
+      payload: response.data.data.profile[0].id
+    });
+
+    //
     navigate('experienceFlow');
+
   } catch (err) {
+
+    //
     dispatch({
       type: 'add_error',
       payload: 'Something went wrong with sign in'
     });
+
   }
+
 };
 
 //
@@ -117,7 +128,14 @@ const signout = dispatch => async () => {
 
 //
 export const { Provider, Context } = createDataContext(
-  authReducer,
-  { signin, signout, signup, clearErrorMessage, tryLocalSignin },
-  { token: null, errorMessage: '' }
+  authReducer, {
+    signin,
+    signout,
+    signup,
+    clearErrorMessage,
+    tryLocalSignin
+  },{
+    token: null,
+    errorMessage: ''
+  }
 );

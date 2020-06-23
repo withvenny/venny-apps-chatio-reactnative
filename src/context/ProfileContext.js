@@ -1,5 +1,8 @@
-import createDataContext from './createDataContext';
-import api from '../api';
+//
+import { AsyncStorage,Alert } from 'react-native';
+
+import createDataContext from 'src/context/createDataContext';
+import api from 'src/api';
 
 //
 const profileReducer = (state, action) => {
@@ -24,26 +27,33 @@ const profileReducer = (state, action) => {
 const getProfiles = dispatch => {
 
   //
-  return async () => {
-  
-      //
-      let path = '/profiles?';
-      path += '&token='+'tkn_thentrlco';
-      path += '&app='+'app_thentrlco';
-      path += '&profile='+'prf_adolphusnolan';
-      //path += '&id='+`${id}`;
-      //path += '&bio='+`${bio}`;
-      //path += '&headline='+`${headline}`;
-      //path += '&access='+`${access}`;
-      //path += '&status='+`${status}`;
-  
-      //
-      const response = await api.get(path);
+  return async (id='',bio='',headline='',access='',status='') => {
 
-      console.log(response.data.data);
-  
-      dispatch({ type: 'get_profiles', payload: response.data.data });
+    var profile = await AsyncStorage.getItem('profile');
+
+    //
+    let path = '/profiles';
+    path += '?token=' + 'tkn_thentrlco';
+    path += '&app=' + 'app_thentrlco';
+    path += '&profile=' + profile;
+
+    //
+    if(!id == ''){path += '&id='+`${id}`;}
+    if(!bio == ''){path += '&bio='+`${bio}`;}
+    if(!headline == ''){path += '&headline='+`${headline}`;}
+    if(!access == ''){path += '&access='+`${access}`;}
+    if(!status == ''){path += '&status='+`${status}`;}
+
+    //
+    const response = await api.get(path);
+
+    console.log(path);
+    console.log(response.data.data);
+
+    dispatch({ type: 'get_profiles', payload: response.data.data });
+
   };
+
 };
   
 // Profile ADD
@@ -98,38 +108,43 @@ const deleteProfile = dispatch => {
       dispatch({ type: 'delete_profile', payload: id });
   };
 };
-  
+
 // Profile EDIT
 const editProfile = dispatch => {
   
   //
   return async (id,bio,headline,status,access,callback) => {
   
-      //
-      let path = '/profiles?';
-      path += '&token='+'tkn_thentrlco';
-      path += '&app='+'app_thentrlco';
-      path += '&profile='+'prf_adolphusnolan';
-      path += '&id='+`${id}`;
-      path += '&bio='+`${bio}`;
-      path += '&headline='+`${headline}`;
-      path += '&access='+`${access}`;
-      path += '&status='+`${status}`;
-  
-      //
-      const response = await api.put(path);
-  
-      //console.log(response);
-  
-      dispatch({
+    //
+    let path = '/profiles?';
+    path += '&token='+'tkn_thentrlco';
+    path += '&app='+'app_thentrlco';
+    path += '&profile='+'prf_adolphusnolan';
+    path += '&id='+`${id}`;
+    path += '&bio='+`${bio}`;
+    path += '&headline='+`${headline}`;
+    path += '&access='+`${access}`;
+    path += '&status='+`${status}`;
+
+    //
+    const response = await api.put(path);
+
+    //console.log(response);
+
+    //
+    dispatch({
       type: 'edit_profile',
       payload: { id, bio, headline, status, access }
-      });
-      if (callback) {
+    });
+    
+    //
+    if (callback) {
       callback();
-      }
+    }
+
   };
-  };
+
+};
 
 //
 export const { Context, Provider } = createDataContext(

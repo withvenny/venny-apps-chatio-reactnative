@@ -60,33 +60,45 @@ const ChatioChatScreen = ({ navigation }) => {
 
     <SafeAreaView style={{flex:1,backgroundColor:'rgb(0,0,0)'}}>
 
-      <KeyboardAvoidingView style={{flex:1,backgroundColor:'rgb(0,255,0)'}} behavior="padding">
+      <KeyboardAvoidingView style={{flex:1,backgroundColor:'rgb(222,222,222)'}} behavior="padding">
 
         <FlatList
           data = { state }
           keyExtractor = { message => message.id}
           renderItem = {({ item }) => {
             return (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('ShowMessage', { id: item.id })}
-              >
-                <View style={styles.row}>
-                  <Text style={styles.body}>
-                  ID: {item.id},
-                  Thread: {item.thread},
-                  Body: {item.body},
-                  Deleted: {item.deleted},
-                  Profile: {item.profile},
-                  When: {item.when},
-                  RELATIVE When: {moment(item.when).fromNow()}
-                  </Text>
-                  <TouchableOpacity onPress={() => deleteMessage(item.id)}>
-                    <Feather style={styles.icon} name="trash" />
-                  </TouchableOpacity>
-                </View>
-              </TouchableOpacity>
+
+              <View style={{flex:1,height:46}}>
+
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('ShowMessage', { id: item.id })}
+                  style={{flex:1}}
+                >
+
+                  <View>
+
+                    <View>
+                      <Text>
+                        {item.body}
+                      </Text>
+                    </View>
+
+                    <View>
+                      <Text>
+                        {item.when}
+                      </Text>
+                    </View>
+
+                  </View>
+
+                </TouchableOpacity>
+              
+              </View>
+              
             );
+
           }}
+
         />
 
         <ComposeBar

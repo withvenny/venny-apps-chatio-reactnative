@@ -1,13 +1,13 @@
 //
 import React, { useState } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { Text, Button, Input, StyleSheet, View, ActivityIndicator } from 'react-native';
 
 //
-import { Text, Button, Input } from 'react-native-elements';
+//import { Text, Button, Input } from 'react-native-elements';
 import Spacer from 'src/components/Spacer';
 
 //
-import styles from "src/values/styles";
+import styles from 'src/values/styles';
 
 //
 const SignInForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
@@ -15,7 +15,7 @@ const SignInForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) =>
     //
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-  
+
     //
     return (
     

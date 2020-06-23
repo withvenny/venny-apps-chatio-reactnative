@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 //
 import { NavigationEvents } from 'react-navigation';
-import { Context as AuthContext } from 'src/context/AuthContext';
+import { Context as AuthProvider } from 'src/context/AuthContext';
 import SignInForm from 'src/components/SignInForm';
 import styles from 'src/values/styles';
 
@@ -12,9 +12,10 @@ import styles from 'src/values/styles';
 const SignInScreen = ({ navigation }) => {
   
   //
-  const { state, signin, clearErrorMessage } = useContext(AuthContext);
+  const { state, signin, clearErrorMessage } = useContext(AuthProvider);
 
   return (
+
     <View style={[styles.container]}>
       <NavigationEvents onWillBlur={clearErrorMessage} />
       <SignInForm
@@ -24,7 +25,9 @@ const SignInScreen = ({ navigation }) => {
         onSubmit={signin}
       />
     </View>
+
   );
+
 };
 
 SignInScreen.navigationOptions = {

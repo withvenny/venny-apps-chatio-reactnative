@@ -66,7 +66,7 @@ const getMessages = dispatch => {
 
     console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
-    Alert.alert("New token set for getMessages: " + profile);
+    //Alert.alert("New token set for getMessages: " + profile);
   
       //
       let path = '/messages?';
@@ -211,7 +211,6 @@ const composeMessage = dispatch => {
       }
   };
 };
-
 
 //
 export const { Context, Provider } = createDataContext(

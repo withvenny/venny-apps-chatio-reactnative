@@ -1,7 +1,12 @@
+//
 import createDataContext from 'src/context/createDataContext';
+
+//
 import {
   Alert, AsyncStorage,
 } from 'react-native';
+
+//
 import api from 'src/api';
 
 //
@@ -52,9 +57,11 @@ const getThreads = dispatch => {
       console.log(response.data.data);
   
       dispatch({ type: 'get_threads', payload: response.data.data });
+
   };
+
 };
-  
+
 // Thread ADD
 const addThread = dispatch => {
   
@@ -184,6 +191,71 @@ const editThread = dispatch => {
   };
 };
 
+// Thread FIND
+const findThread = dispatch => async ({ contributors }) => {
+
+  //
+  //return async (contributors) => {
+
+  console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+  var profile = await AsyncStorage.getItem('profile');
+  Alert.alert("New token set for addThread: " + profile);
+
+  //
+  var participants = {"blocked":[]};
+
+  //
+  participants.administrators = [`${profile}`];
+
+  //
+  participants.contributors = [`${profile}`];
+  participants.contributors.push(contributors);
+
+  //Result:
+  console.log(participants);
+
+  //
+  let path = '/threads?';
+  path += 'token='+'tkn_thentrlco';
+  path += '&app='+'app_thentrlco';
+  path += '&profile='+profile;
+  //path += '&id='+`${id}`;
+  //path += '&title='+`${title}`;
+  path += '&participants='+ JSON.stringify(participants);
+  //path += '&participants='+`${participants}`;
+  //path += '&preview='+`${preview}`;
+
+  //
+  console.log("path: "+path);
+
+  try {
+
+    //
+    const response = await api.post(path);
+
+    console.log(response);
+
+    //
+    dispatch({
+      type: 'findThread',
+      payload: response.data.data.thread[0].id
+    });
+
+    //
+    navigate('Chat', { id: response.data.data.thread[0].id });
+  
+  } catch (err) {
+
+    //
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with new thread'
+    });
+
+  }
+
+};
+
 //
 export const { Context, Provider } = createDataContext(
   threadReducer, {
@@ -191,5 +263,6 @@ export const { Context, Provider } = createDataContext(
     deleteThread,
     editThread,
     getThreads,
+    findThread
   },[]
 );

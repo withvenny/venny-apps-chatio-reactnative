@@ -50,9 +50,13 @@ const WelcomeScreen = ({ navigation }) => {
 };
 
 WelcomeScreen.navigationOptions = () => {
-    return {
-        header: null
-    };
+
+  return {
+
+      header: null
+      
+  };
+
 };  
 
 export default WelcomeScreen;
