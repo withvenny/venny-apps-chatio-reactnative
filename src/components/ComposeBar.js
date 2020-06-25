@@ -29,8 +29,10 @@ if (Platform.OS === 'ios') {
 
 }
 
-// iOS offset height...
-const IOS_OFFSET = 44;
+// Could be nav bar height?
+// Magic number but is necessary to work properly
+//const IOS_OFFSET = 44;
+const IOS_OFFSET = 80;
 
 //
 const getVerticalOffset = () => Platform.select({
@@ -44,44 +46,35 @@ const getVerticalOffset = () => Platform.select({
 // ADD MORE NAVIGATION VALUES 
 const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
 
-  //
-  const [body, setBody] = useState(initialValues.body);
+    const [body, setBody] = useState(initialValues.body);
 
-  //
-  console.log("ComposeBar/thread/"+thread);
-  console.log("ComposeBar/contributors/"+contributors);
+    console.log("ComposeBar/thread/"+thread);
+    console.log("ComposeBar/contributors/"+JSON.stringify(contributors));
 
-  //
-  return (
+    return (
+      <KeyboardAvoidingView
+        style={{position:'absolute',bottom:0,width:'100%',alignItems:'center',backgroundColor:'grey'}}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={getVerticalOffset()}
+      >
+                <View>
+                
+                <TextInput
+                  value={body}
+                  autoCorrect={true}
+                  autoCapitalize='none'
+                  placeholder={'Enter the index to scroll'}
+                  onChangeText={text => setBody(text)}
+                />
+                </View>
+        
+              <View>
+                <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
+              </View>
 
-    <KeyboardAvoidingView
-      style={{position:'absolute',bottom:0,width:'100%',alignItems:'center',backgroundColor:'grey',borderWidth:2,borderColor:'black',height:46}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={getVerticalOffset()}
-    >
-      <View style={{position:'absolute',left:0,width:'80%'}}>
-
-        <TextInput
-          value={body}
-          autoCorrect={true}
-          autoCapitalize='none'
-          placeholder={'Enter the index to scroll'}
-          onChangeText={text => setBody(text)}
-        />
-
-      </View>
-
-      <View style={{position:'absolute',right:0,height:50,width:'20%'}}>
-
-        <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
-
-      </View>
-
-
-    </KeyboardAvoidingView>
-
-  );
-
+        
+              </KeyboardAvoidingView>
+    );
 };
 
 //
