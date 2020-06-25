@@ -1,9 +1,9 @@
 //
 import React, { useState } from 'react';
-import { Text, Button, Input, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 
 //
-//import { Text, Button, Input } from 'react-native-elements';
+import { Text, Button, Input } from 'react-native-elements';
 import Spacer from 'src/components/Spacer';
 
 //
@@ -18,9 +18,7 @@ const SignInForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) =>
 
     //
     return (
-    
         <>
-
             <Spacer>
                 <Text h3>{headerText}</Text>
             </Spacer>
@@ -68,9 +66,7 @@ const SignInForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) =>
             </Spacer>
 
         </>
-
     );
-
 };
 
 export default SignInForm;

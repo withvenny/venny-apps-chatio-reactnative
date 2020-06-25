@@ -34,7 +34,7 @@ if (Platform.OS === 'ios') {
 //const IOS_OFFSET = 44;
 const IOS_OFFSET = 80;
 // iOS offset height...
-const IOS_OFFSET = 44;
+//const IOS_OFFSET = 44;
 
 //
 const getVerticalOffset = () => Platform.select({
@@ -77,43 +77,6 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
         
               </KeyboardAvoidingView>
     );
-  //
-  const [body, setBody] = useState(initialValues.body);
-
-  //
-  console.log("ComposeBar/thread/"+thread);
-  console.log("ComposeBar/contributors/"+contributors);
-
-  //
-  return (
-
-    <KeyboardAvoidingView
-      style={{position:'absolute',bottom:0,width:'100%',alignItems:'center',backgroundColor:'grey',borderWidth:2,borderColor:'black',height:46}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={getVerticalOffset()}
-    >
-      <View style={{position:'absolute',left:0,width:'80%'}}>
-
-        <TextInput
-          value={body}
-          autoCorrect={true}
-          autoCapitalize='none'
-          placeholder={'Enter the index to scroll'}
-          onChangeText={text => setBody(text)}
-        />
-
-      </View>
-
-      <View style={{position:'absolute',right:0,height:50,width:'20%'}}>
-
-        <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
-
-      </View>
-
-
-    </KeyboardAvoidingView>
-
-  );
 
 };
 
