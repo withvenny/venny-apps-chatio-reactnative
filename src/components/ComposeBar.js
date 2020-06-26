@@ -77,7 +77,6 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
         
               </KeyboardAvoidingView>
     );
-
 };
 
 //
