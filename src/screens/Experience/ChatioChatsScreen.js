@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import {
+  Alert,
+  AsyncStorage,
   Image,
   FlatList,
   StyleSheet,
@@ -7,7 +9,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { Context } from 'src/context/ThreadContext';
+import { Context as ThreadProvider } from 'src/context/ThreadContext';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
 import moment from 'moment';
@@ -15,9 +17,25 @@ import styles from 'src/values/styles';
 
 //
 const ChatioChatsScreen = ({ navigation }) => {
-  
+
+  AsyncStorage.getItem('profile').then((profile) => {
+
+    if (profile !== null) {
+        var profile = AsyncStorage.getItem('profile');
+        console.log("profile", profile);
+    }
+
+  });
+
+AsyncStorage.getItem('token').then((token) => {
+
+  if (token !== null) {
+      console.log("token", token);
+  }
+});
+
   //
-  const { state, deleteThread, getThreads } = useContext(Context);
+  const { state, deleteThread, getThreads } = useContext(ThreadProvider);
 
   //
   useEffect(() => {
@@ -58,17 +76,17 @@ const ChatioChatsScreen = ({ navigation }) => {
                 <View style={{flex:1,borderColor:'green',borderWidth:1}}>
                   
                   <Text>
-                    [image]
+                    {item.participants.contributors.toString()}
                   </Text>
 
                 </View>
-                
+
                 <View style={{flex:4,borderColor:'red',borderWidth:1,flexDirection:'column'}}>
 
                   <View style={{flex:1,borderColor:'pink',borderWidth:1,justifyContent:'flex-end'}}>
 
                     <Text>
-                      Contributors: {item.participants.contributors.toString()}
+                      Contributor(s): {item.participants.contributors.filter(item => !'prf_4dd2cf3c19bc2'.includes(item))}
                     </Text>
 
                   </View>
@@ -106,7 +124,7 @@ ChatioChatsScreen.navigationOptions = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('Profile', { id: state.id })}>
 
         <Image
-          source={{uri : 'https://secure.gravatar.com/avatar/dbbab0050db2dbd84d4e2c844196ee0c?s=60&d=mm&r=g'}}
+          source={{uri : 'https://io-venny-api.imgix.net/images/16177718_10154838094185396_8364198342188418754_o.png'}}
           style={{ width: 40, height: 40, borderRadius: 40/2, marginLeft : 15 }}
         />
       </TouchableOpacity>
