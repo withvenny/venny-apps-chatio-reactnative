@@ -18,21 +18,18 @@ import styles from 'src/values/styles';
 //
 const ChatioChatsScreen = ({ navigation }) => {
 
-  AsyncStorage.getItem('profile').then((profile) => {
+  getValueLocally=()=>{
 
-    if (profile !== null) {
-        var profile = AsyncStorage.getItem('profile');
-        console.log("profile", profile);
-    }
+    AsyncStorage.getItem('profile').then((profile) => {
 
-  });
+      if (profile !== null) {
+          const profile = AsyncStorage.getItem('profile');
+          console.log("profile: ", profile);
+      }
+  
+    })
 
-AsyncStorage.getItem('token').then((token) => {
-
-  if (token !== null) {
-      console.log("token", token);
   }
-});
 
   //
   const { state, deleteThread, getThreads } = useContext(ThreadProvider);
@@ -64,6 +61,7 @@ AsyncStorage.getItem('token').then((token) => {
       <FlatList
 
         data={state}
+        //extraData={profile}
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
 
@@ -76,7 +74,7 @@ AsyncStorage.getItem('token').then((token) => {
                 <View style={{flex:1,borderColor:'green',borderWidth:1}}>
                   
                   <Text>
-                    {item.participants.contributors.toString()}
+                    {JSON.stringify(item.participants.contributors)}
                   </Text>
 
                 </View>
@@ -86,15 +84,15 @@ AsyncStorage.getItem('token').then((token) => {
                   <View style={{flex:1,borderColor:'pink',borderWidth:1,justifyContent:'flex-end'}}>
 
                     <Text>
-                      Contributor(s): {item.participants.contributors.filter(item => !'prf_4dd2cf3c19bc2'.includes(item))}
+                      {item.participants.contributors.slice(!item.participants.contributors.indexOf(item.profile))}
                     </Text>
 
                   </View>
 
                   <View style={{flex:1,borderColor:'lime',borderWidth:1,justifyContent:'flex-start'}}>
 
-                    <Text>
-                      Preview: {item.preview} • {moment(item.when).fromNow()}
+                    <Text numberOfLines = {1} ellipsizeMode = 'head'>
+                      {item.preview} • {moment(item.when).fromNow()}
                     </Text>
 
                   </View>

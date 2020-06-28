@@ -55,9 +55,22 @@ const signup = dispatch => async ({ email, password, name }) => {
       
       //
       const response = await api.post(path);
-    
-      dispatch({ type: 'signin', payload: response.data.data });
 
+      await AsyncStorage.setItem('token', response.data.data.profile[0].id);
+      await AsyncStorage.setItem('profile', response.data.data.profile[0].id);  
+
+      //console.log(await AsyncStorage.getItem('Token: ' + 'token'));
+      //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+
+      var profile = await AsyncStorage.getItem('profile');
+    
+      dispatch({
+        type: 'signin',
+        payload: response.data.data.profile[0].id
+
+      });
+
+      //
       navigate('experienceFlow');
 
     } catch (err) {
@@ -90,12 +103,12 @@ const signin = dispatch => async ({ email, password }) => {
     await AsyncStorage.setItem('token', response.data.data.profile[0].id);
     await AsyncStorage.setItem('profile', response.data.data.profile[0].id);
 
-    console.log(await AsyncStorage.getItem('Token: ' + 'token'));
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    //console.log(await AsyncStorage.getItem('Token: ' + 'token'));
+    //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
 
     var profile = await AsyncStorage.getItem('profile');
 
-    Alert.alert("New token set: " + profile);
+    //Alert.alert("New token set: " + profile);
 
     //
     dispatch({
