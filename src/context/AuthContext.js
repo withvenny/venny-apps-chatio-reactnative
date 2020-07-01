@@ -112,8 +112,10 @@ const signin = dispatch => async ({ email, password }) => {
 
     //
     dispatch({
+
       type: 'signin',
       payload: response.data.data.profile[0].id
+
     });
 
     //
@@ -123,8 +125,10 @@ const signin = dispatch => async ({ email, password }) => {
 
     //
     dispatch({
+
       type: 'add_error',
       payload: 'Something went wrong with sign in'
+
     });
 
   }
@@ -133,8 +137,13 @@ const signin = dispatch => async ({ email, password }) => {
 
 //
 const signout = dispatch => async () => {
+  
   await AsyncStorage.removeItem('token');
-  dispatch({ type: 'signout' });
+  dispatch({
+
+    type: 'signout'
+
+  });
   //navigate('loginFlow');
   navigate('ResolveAuth');
 };

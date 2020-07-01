@@ -36,7 +36,7 @@ const getThreads = dispatch => {
   //
   return async () => {
 
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
     //Alert.alert("New token set for getThreads: " + profile);  
   
@@ -51,12 +51,12 @@ const getThreads = dispatch => {
       //path += '&preview='+`${preview}`;
   
       //
-      console.log("path: "+path);
+      //console.log("path: "+path);
       
       //
       const response = await api.get(path);
 
-      console.log(response.data.data);
+      //console.log(response.data.data);
   
       dispatch({ type: 'get_threads', payload: response.data.data });
 
@@ -199,9 +199,9 @@ const findThread = dispatch => async ({ contributors }) => {
   //
   //return async (contributors) => {
 
-  console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+  //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
   var profile = await AsyncStorage.getItem('profile');
-  Alert.alert("New token set for findThread: " + profile);
+  //Alert.alert("New token set for findThread: " + profile);
 
   //
   var participants = {"blocked":[]};
@@ -214,7 +214,7 @@ const findThread = dispatch => async ({ contributors }) => {
   participants.contributors.push(contributors);
 
   //Result:
-  console.log(JSON.stringify(participants));
+  //console.log(JSON.stringify(participants));
 
   //
   let path = '/threads?';
@@ -228,8 +228,8 @@ const findThread = dispatch => async ({ contributors }) => {
   //path += '&preview='+`${preview}`;
 
   //
-  console.log("path: "+path);
-  Alert.alert(path);
+  //console.log("path: "+path);
+  //Alert.alert(path);
 
   /*
   try {
@@ -238,8 +238,8 @@ const findThread = dispatch => async ({ contributors }) => {
     //
     const response = await api.post(path);
 
-    console.log("//ThreadContext/findThread/"+JSON.stringify(response.data.data[0].id));
-    Alert.alert(JSON.stringify(response.data.data[0].id));
+    //console.log("//ThreadContext/findThread/"+JSON.stringify(response.data.data[0].id));
+    //Alert.alert(JSON.stringify(response.data.data[0].id));
 
     //
     dispatch({

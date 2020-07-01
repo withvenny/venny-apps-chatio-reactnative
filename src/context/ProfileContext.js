@@ -47,8 +47,8 @@ const getProfiles = dispatch => {
     //
     const response = await api.get(path);
 
-    console.log(path);
-    console.log(response.data.data);
+    //console.log(path);
+    //console.log(response.data.data);
 
     dispatch({ type: 'get_profiles', payload: response.data.data });
 

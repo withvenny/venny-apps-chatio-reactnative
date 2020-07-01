@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Alert,
   AsyncStorage,
@@ -9,7 +9,9 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+console.disableYellowBox = true;
 import { Context as ThreadProvider } from 'src/context/ThreadContext';
+//import profileGet from 'src/components/localStorage';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
 import moment from 'moment';
@@ -18,17 +20,18 @@ import styles from 'src/values/styles';
 //
 const ChatioChatsScreen = ({ navigation }) => {
 
-  getValueLocally=()=>{
+  const [profile,setProfile] = useState('');
 
-    AsyncStorage.getItem('profile').then((profile) => {
-
-      if (profile !== null) {
-          const profile = AsyncStorage.getItem('profile');
-          console.log("profile: ", profile);
+  const getProfile = async () => {
+    try {
+         const result = await AsyncStorage.getItem('profile');
+         console.log("//localStorage/result",result);
+         setProfile(results);
+         console.log("//myfirsthook",profile);
+         return async (result);
+      } catch(error) {
+        console.log(error);
       }
-  
-    })
-
   }
 
   //
@@ -84,7 +87,9 @@ const ChatioChatsScreen = ({ navigation }) => {
                   <View style={{flex:1,borderColor:'pink',borderWidth:1,justifyContent:'flex-end'}}>
 
                     <Text>
-                      {item.participants.contributors.slice(!item.participants.contributors.indexOf(item.profile))}
+                      {
+                        item.participants.contributors.splice(item.participants.contributors.indexOf(item.participants),1,)
+                      }
                     </Text>
 
                   </View>
@@ -92,7 +97,7 @@ const ChatioChatsScreen = ({ navigation }) => {
                   <View style={{flex:1,borderColor:'lime',borderWidth:1,justifyContent:'flex-start'}}>
 
                     <Text numberOfLines = {1} ellipsizeMode = 'head'>
-                      {item.preview} • {moment(item.when).fromNow()}
+                      {item.preview} • {moment(item.updated).fromNow()}
                     </Text>
 
                   </View>
@@ -117,7 +122,7 @@ const ChatioChatsScreen = ({ navigation }) => {
 
 ChatioChatsScreen.navigationOptions = ({ navigation }) => {
   return {
-    headerLeft: (
+    headerLeft: ()=>(
      
       <TouchableOpacity onPress={() => navigation.navigate('Profile', { id: state.id })}>
 
@@ -127,7 +132,7 @@ ChatioChatsScreen.navigationOptions = ({ navigation }) => {
         />
       </TouchableOpacity>
     ),
-    headerRight: (
+    headerRight: ()=>(
       <TouchableOpacity onPress={() => navigation.navigate('People')}>
         <Feather name="plus" size={30} />
       </TouchableOpacity>
