@@ -11,41 +11,62 @@ import {
 } from 'react-native';
 console.disableYellowBox = true;
 import { Context as ThreadProvider } from 'src/context/ThreadContext';
-//import profileGet from 'src/components/localStorage';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
+import { 
+  //getProfile,
+  //profileGet
+} from 'src/components/localStorage';
 import moment from 'moment';
 import styles from 'src/values/styles';
+
+  //
+  //const { profile } = profileGet();
+  //console.log("==========",Date(),"==========");
+  //console.log("//ChatioChatsScreen/profile",profile);
 
 //
 const ChatioChatsScreen = ({ navigation }) => {
 
-  const [profile,setProfile] = useState('');
+  //
+const profileGet = async () => {
 
-  const getProfile = async () => {
-    try {
-         const result = await AsyncStorage.getItem('profile');
-         console.log("//localStorage/result",result);
-         setProfile(results);
-         console.log("//myfirsthook",profile);
-         return async (result);
-      } catch(error) {
-        console.log(error);
-      }
+  
+
+  try {
+
+    AsyncStorage.getItem('profile')
+      .then((value) => {
+        const profile = value;
+        console.log('//ChatioChatsScreen/profileGet', profile);
+        return profile;
+      });
+
+  } catch(error) {
+
+    console.log(error);
+  
   }
+
+};
 
   //
   const { state, deleteThread, getThreads } = useContext(ThreadProvider);
+  const { profile } = profileGet();
 
   //
   useEffect(() => {
 
     //
     getThreads();
+    //profileGet();
 
     //
     const listener = navigation.addListener('didFocus', () => {
+
       getThreads();
+      //profileGet();
+
     });
 
     //
@@ -64,7 +85,7 @@ const ChatioChatsScreen = ({ navigation }) => {
       <FlatList
 
         data={state}
-        //extraData={profile}
+        extraData={profile}
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
 
@@ -72,29 +93,35 @@ const ChatioChatsScreen = ({ navigation }) => {
             
             <View style={{flex:1,height:78}}>
               
-              <TouchableOpacity style={{flex:1,flexDirection:'row',borderColor:'blue',borderWidth:2}} onPress={() => navigation.navigate('Chat', { id: item.id, contributors: item.participants.contributors })}>
+              <TouchableOpacity style={{flex:1,flexDirection:'row',borderColor:'blue',borderWidth:0}} onPress={() => navigation.navigate('Chat', { id: item.id, contributors: item.participants.contributors })}>
                 
-                <View style={{flex:1,borderColor:'green',borderWidth:1}}>
+                <View style={{flex:1,borderColor:'green',borderWidth:0,padding:10}}>
                   
                   <Text>
-                    {JSON.stringify(item.participants.contributors)}
+                  {item.profile}
                   </Text>
 
                 </View>
 
-                <View style={{flex:4,borderColor:'red',borderWidth:1,flexDirection:'column'}}>
+                <View style={{flex:4,borderColor:'red',borderWidth:0,flexDirection:'column'}}>
 
-                  <View style={{flex:1,borderColor:'pink',borderWidth:1,justifyContent:'flex-end'}}>
+                  <View style={{flex:1,borderColor:'pink',borderWidth:0,justifyContent:'flex-end'}}>
 
-                    <Text>
+                    <Text style={{fontWeight:'bold',fontSize:'18'}}>
                       {
-                        item.participants.contributors.splice(item.participants.contributors.indexOf(item.participants),1,)
+                        //item.participants.contributors.filter(item=>!profile.includes(item))
+                      }
+                      {
+                        //item.participants.contributors.filter(item=>item !== item.profile)
+                      }
+                      {
+                        item.participants.contributors
                       }
                     </Text>
 
                   </View>
 
-                  <View style={{flex:1,borderColor:'lime',borderWidth:1,justifyContent:'flex-start'}}>
+                  <View style={{flex:1,borderColor:'lime',borderWidth:0,justifyContent:'flex-start', paddingRight:10}}>
 
                     <Text numberOfLines = {1} ellipsizeMode = 'head'>
                       {item.preview} • {moment(item.updated).fromNow()}
