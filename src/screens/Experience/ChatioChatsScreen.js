@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {
   Alert,
-  AsyncStorage,
   Image,
   FlatList,
   StyleSheet,
@@ -12,10 +11,9 @@ import {
 console.disableYellowBox = true;
 import { Context as ThreadProvider } from 'src/context/ThreadContext';
 import { Feather } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons'; 
 import { 
-  //getProfile,
-  //profileGet
+  getProfile,
+  profileGet
 } from 'src/components/localStorage';
 import moment from 'moment';
 import styles from 'src/values/styles';
@@ -29,30 +27,10 @@ import styles from 'src/values/styles';
 const ChatioChatsScreen = ({ navigation }) => {
 
   //
-const profileGet = async () => {
-
-  
-
-  try {
-
-    AsyncStorage.getItem('profile')
-      .then((value) => {
-        const profile = value;
-        console.log('//ChatioChatsScreen/profileGet', profile);
-        return profile;
-      });
-
-  } catch(error) {
-
-    console.log(error);
-  
-  }
-
-};
-
-  //
   const { state, deleteThread, getThreads } = useContext(ThreadProvider);
-  const { profile } = profileGet();
+  const currentUser1 = getProfile();
+  const currentUser2 = profileGet();
+  console.log(currentUser1,currentUser2);
 
   //
   useEffect(() => {
@@ -85,7 +63,7 @@ const profileGet = async () => {
       <FlatList
 
         data={state}
-        extraData={profile}
+        //extraData={props}
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
 
@@ -93,7 +71,10 @@ const profileGet = async () => {
             
             <View style={{flex:1,height:78}}>
               
-              <TouchableOpacity style={{flex:1,flexDirection:'row',borderColor:'blue',borderWidth:0}} onPress={() => navigation.navigate('Chat', { id: item.id, contributors: item.participants.contributors })}>
+              <TouchableOpacity
+                style={{flex:1,flexDirection:'row',borderColor:'blue',borderWidth:0}}
+                onPress={() => navigation.navigate('Chat', { id: item.id, contributors: item.participants.contributors })}
+              >
                 
                 <View style={{flex:1,borderColor:'green',borderWidth:0,padding:10}}>
                   
@@ -107,7 +88,7 @@ const profileGet = async () => {
 
                   <View style={{flex:1,borderColor:'pink',borderWidth:0,justifyContent:'flex-end'}}>
 
-                    <Text style={{fontWeight:'bold',fontSize:'18'}}>
+                    <Text style={{fontWeight:'bold',fontSize:18}}>
                       {
                         //item.participants.contributors.filter(item=>!profile.includes(item))
                       }

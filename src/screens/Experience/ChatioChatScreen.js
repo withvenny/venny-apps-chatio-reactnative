@@ -68,24 +68,35 @@ const ChatioChatScreen = ({ navigation }) => {
           renderItem = {({ item }) => {
             return (
 
-              <View style={{flex:1,height:46}}>
+              <View style={{borderWidth:2,borderColor:'red',flex:1}}>
 
                 <TouchableOpacity
                   onPress={() => navigation.navigate('ShowMessage', { id: item.id })}
-                  style={{flex:1}}
+                  style={{flex:1,flexDirection:'row',borderColor:'blue',borderWidth:0}}
                 >
 
-                  <View>
+                  <View style={{flex:1,borderColor:'green',borderWidth:0,padding:10}}>
 
-                    <View>
+                    <View style={{borderWidth:1,borderColor:'black'}}>
                       <Text>
-                        {item.body}
+                      {item.profile}
                       </Text>
                     </View>
 
-                    <View>
+                  </View>
+
+                  <View style={{flex:4,borderColor:'red',borderWidth:0,flexDirection:'column'}}>
+
+                    <View style={{borderWidth:1,borderColor:'black'}}>
                       <Text>
-                        {item.when}
+                      {item.profile} {moment(item.updated).fromNow()}
+
+                      </Text>
+                    </View>
+
+                    <View style={{borderWidth:1,borderColor:'black'}}>
+                      <Text>
+                      {item.body}
                       </Text>
                     </View>
 

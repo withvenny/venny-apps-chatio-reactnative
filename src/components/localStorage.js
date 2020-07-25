@@ -16,7 +16,7 @@ const profileGet = async () => {
   try {
 
     const profile = await AsyncStorage.getItem('profile');
-    console.log("//localStorage/profileGet/profile",profile);
+    //console.log("//localStorage/profileGet/profile",profile);
 
     //
     return () => {
