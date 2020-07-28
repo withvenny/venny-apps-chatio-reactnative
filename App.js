@@ -145,8 +145,8 @@ const inboxStack = createStackNavigator({
 const chatStack = createStackNavigator({
 
   //
-  Chats: ChatsScreen,
-  Chat: ChatScreen,
+  Chats: {screen:ChatsScreen,navigationOptions:{tabBarVisible:false}},
+  Chat: {screen:ChatScreen,navigationOptions:{tabBarVisible:true}},
   Compose: ComposeScreen,
   People: PeopleScreen,
   Profile: ProfileScreen,
@@ -208,7 +208,19 @@ profileStack.navigationOptions = { title: 'Me', tabBarIcon: <Ionicons name="md-p
 
 onboardingStack.navigationOptions = { header: null, title: 'onboarding', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
-chatStack.navigationOptions = { tabBarVisible: true, title: 'Chats', tabBarIcon: <FontAwesome name="comments" size={20} /> };
+chatStack.navigationOptions = ({ navigation }) => {
+
+  let tabBarVisible = true;
+  let title= 'Chats';
+  let tabBarIcon= <FontAwesome name="comments" size={20} />;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible, title, tabBarIcon
+  }
+};
+
 peopleStack.navigationOptions = { title: 'People', tabBarIcon: <FontAwesome name="users" size={20} /> };
 
 //
