@@ -1,49 +1,12 @@
 import React, { useState } from 'react';
 import {
   Button,
-  KeyboardAvoidingView,
-  NativeModules,
-  Platform,
   StyleSheet,
   Text,
   TextInput,
-  View,
-  Dimensions,
+  View
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-
-const { StatusBarManager } = NativeModules;
-
-//
-let statusBarHeight = 0;
-
-//
-if (Platform.OS === 'ios') {
-
-  //
-  StatusBarManager.getHeight((statusBarFrameData) => {
-
-    statusBarHeight = statusBarFrameData.height;
-
-  });
-
-}
-
-// Could be nav bar height?
-// Magic number but is necessary to work properly
-//const IOS_OFFSET = 44;
-const IOS_OFFSET = 80;
-// iOS offset height...
-//const IOS_OFFSET = 44;
-
-//
-const getVerticalOffset = () => Platform.select({
-
-  //
-  ios: statusBarHeight + IOS_OFFSET,
-  android: 0
-
-});
 
 // ADD MORE NAVIGATION VALUES 
 const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
@@ -54,28 +17,29 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
     console.log("ComposeBar/contributors/"+JSON.stringify(contributors));
 
     return (
-      <KeyboardAvoidingView
-        style={{position:'absolute',bottom:0,width:'100%',alignItems:'center',backgroundColor:'grey'}}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={getVerticalOffset()}
-      >
-                <View>
-                
-                <TextInput
-                  value={body}
-                  autoCorrect={true}
-                  autoCapitalize='none'
-                  placeholder={'Enter the index to scroll'}
-                  onChangeText={text => setBody(text)}
-                />
-                </View>
-        
-              <View>
-                <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
-              </View>
 
-        
-              </KeyboardAvoidingView>
+      <View style={{borderWidth:5,borderColor:'cyan',flex:1,flexDirection:'row'}}>
+
+        <View style={{flex:4}}>
+
+          <TextInput
+          value={body}
+          autoCorrect={true}
+          autoCapitalize='none'
+          placeholder={'Enter the index to scroll'}
+          onChangeText={text => setBody(text)}
+          />
+
+        </View>
+
+        <View style={{flex:1}}>
+
+          <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
+
+        </View>
+
+      </View>
+
     );
 };
 

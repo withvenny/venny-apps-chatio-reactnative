@@ -80,19 +80,20 @@ const ChatioChatScreen = ({ navigation }) => {
     <SafeAreaView style={{flex:1,backgroundColor:'rgb(0,0,0)'}}>
 
       <KeyboardAvoidingView
-        style={{backgroundColor:'rgb(222,222,222)',position:'absolute',bottom:0,width:'100%',alignItems:'center'}}
+        style={{backgroundColor:'rgb(222,222,222)',flex:1,position:'absolute',bottom:0,width:'100%',alignItems:'center'}}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         enabled
         keyboardVerticalOffset={getVerticalOffset()}
       >
 
         <FlatList
+          style={{borderWidth:2,borderColor:'green',width:'100%',flex:1}}
           data = { state }
           keyExtractor = { message => message.id}
           renderItem = {({ item }) => {
             return (
 
-              <View style={{borderWidth:2,borderColor:'red',flex:1}}>
+              <View style={{borderWidth:2,borderColor:'blue',flex:1}}>
 
                 <TouchableOpacity
                   onPress={() => navigation.navigate('ShowMessage', { id: item.id })}
@@ -101,7 +102,7 @@ const ChatioChatScreen = ({ navigation }) => {
 
                   <View style={{flex:1,borderColor:'green',borderWidth:0,padding:10}}>
 
-                    <View style={{borderWidth:1,borderColor:'black'}}>
+                    <View style={{borderWidth:1,borderColor:'pink'}}>
                       <Text>
                       {item.profile}
                       </Text>
@@ -118,7 +119,7 @@ const ChatioChatScreen = ({ navigation }) => {
                       </Text>
                     </View>
 
-                    <View style={{borderWidth:1,borderColor:'black'}}>
+                    <View style={{borderWidth:1,borderColor:'orange'}}>
                       <Text>
                       {item.body}
                       </Text>
@@ -136,9 +137,9 @@ const ChatioChatScreen = ({ navigation }) => {
 
         />
 
+          <View style = {{borderWidth:5,width:'100%'}}>
         <ComposeBar
 
-          style={{justifySelf: 'flex-end',height: 40, width: '100%'}}
           contributors={contributors}
           thread={thread}
           onSubmit={(body,contributors,thread) => {
@@ -150,7 +151,7 @@ const ChatioChatScreen = ({ navigation }) => {
             );
           }}
 
-        />
+        /></View>
 
       </KeyboardAvoidingView>
 
