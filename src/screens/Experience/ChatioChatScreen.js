@@ -21,6 +21,25 @@ import { Feather } from '@expo/vector-icons';
 import ComposeBar from 'src/components/ComposeBar';
 import moment from 'moment';
 
+const { StatusBarManager } = NativeModules;
+
+let statusBarHeight = 0;
+if (Platform.OS === 'ios') {
+  StatusBarManager.getHeight((statusBarFrameData) => {
+    statusBarHeight = statusBarFrameData.height;
+  });
+}
+
+// Could be nav bar height?
+// Magic number but is necessary to work properly
+const IOS_OFFSET = 44;
+
+//
+const getVerticalOffset = () => Platform.select({
+  ios: statusBarHeight + IOS_OFFSET,
+  android: 0
+});
+
 //
 const ChatioChatScreen = ({ navigation }) => {
 
@@ -60,7 +79,12 @@ const ChatioChatScreen = ({ navigation }) => {
 
     <SafeAreaView style={{flex:1,backgroundColor:'rgb(0,0,0)'}}>
 
-      <KeyboardAvoidingView style={{flex:1,backgroundColor:'rgb(222,222,222)'}} behavior="padding">
+      <KeyboardAvoidingView
+        style={{backgroundColor:'rgb(222,222,222)',position:'absolute',bottom:0,width:'100%',alignItems:'center'}}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        enabled
+        keyboardVerticalOffset={getVerticalOffset()}
+      >
 
         <FlatList
           data = { state }
@@ -134,19 +158,6 @@ const ChatioChatScreen = ({ navigation }) => {
 
   );
 
-};
-
-//
-ChatioChatScreen.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = false;
-  return {
-    tabBarVisible,
-    headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate('CreateMessage')}>
-        <Feather name="plus" size={30} />
-      </TouchableOpacity>
-    )
-  };
 };
 
 //
