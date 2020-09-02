@@ -48,35 +48,6 @@ const ChatioChatsScreen = ({ navigation }) => {
 
   }, [])
 
-  //
-  //const profile = async () => AsyncStorage.getItem('profile', (err, profile) => {console.log(profile);return profile;});
-  //const alias = async () => AsyncStorage.getItem('alias', (err, alias) => {console.log(alias);return alias;});
-
-
-  const users = [{
-    "name": "John",
-    "color": "blue",
-  },{
-    "name": "Tim",
-    "color": "red",
-  },{
-    "name": "Mike",
-    "color": "green",
-  }];
-  
-  const contributor_names = item.contributors.map(item => item.alias).join(', ');
-  console.log(contributor_names);
-  const alias = AsyncStorage.getItem('alias', (err, alias) => {console.log(alias);return alias;});
-  //console.log(alias);
-  
-      getValueLocally=(array)=>{
-  
-  //AsyncStorage.getItem('Key_27').then((value) => this.setState({ getValue : value }))
-  const alias = AsyncStorage.getItem('alias', (err, alias) => {console.log(alias);return alias;});
-  array.filter((item)=>!alias.includes(item))
-  
-  }
-
   return (
 
     <View style={{flex:1,flexDirection:'row'}}>
@@ -87,6 +58,13 @@ const ChatioChatsScreen = ({ navigation }) => {
         //extraData={alias}
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
+
+          const contributor_names = item.contributors.map(item => item.alias).join(', ');
+          //console.log(contributor_name_list);
+          //const profile=item.profile
+          //const contributor_names = contributor_name_list.filter(item=>!profile.includes(item))
+
+          console.log(contributor_names);
 
           return (
             
