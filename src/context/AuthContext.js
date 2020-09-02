@@ -13,6 +13,8 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: action.payload };
     case 'signin':
       return { errorMessage: '', token: action.payload };
+    case 'profile':
+      return { errorMessage: '', profile: action.payload };
     case 'clear_error_message':
       return { ...state, errorMessage: '' };
     case 'signout':
@@ -102,6 +104,7 @@ const signin = dispatch => async ({ email, password }) => {
 
     await AsyncStorage.setItem('token', response.data.data.profile[0].id);
     await AsyncStorage.setItem('profile', response.data.data.profile[0].id);
+    await AsyncStorage.setItem('alias', response.data.data.profile[0].alias);
 
     //console.log(await AsyncStorage.getItem('Token: ' + 'token'));
     //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));

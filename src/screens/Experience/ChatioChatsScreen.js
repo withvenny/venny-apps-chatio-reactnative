@@ -8,42 +8,34 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 console.disableYellowBox = true;
 import { Context as ThreadProvider } from 'src/context/ThreadContext';
+import { Context as AuthProvider } from 'src/context/AuthContext';
 import { Feather } from '@expo/vector-icons';
-import { 
-  getProfile,
-  profileGet
-} from 'src/components/localStorage';
+//import { getData } from 'src/components/localStorage';
 import moment from 'moment';
 import styles from 'src/values/styles';
 
-  //
-  //const { profile } = profileGet();
-  //console.log("==========",Date(),"==========");
-  //console.log("//ChatioChatsScreen/profile",profile);
+//
+console.log("==========",Date(),"==========");
 
 //
 const ChatioChatsScreen = ({ navigation }) => {
 
   //
   const { state, deleteThread, getThreads } = useContext(ThreadProvider);
-  const currentUser1 = getProfile();
-  const currentUser2 = profileGet();
-  console.log(currentUser1,currentUser2);
 
   //
   useEffect(() => {
 
     //
     getThreads();
-    //profileGet();
 
     //
     const listener = navigation.addListener('didFocus', () => {
 
       getThreads();
-      //profileGet();
 
     });
 
@@ -56,6 +48,35 @@ const ChatioChatsScreen = ({ navigation }) => {
 
   }, [])
 
+  //
+  //const profile = async () => AsyncStorage.getItem('profile', (err, profile) => {console.log(profile);return profile;});
+  //const alias = async () => AsyncStorage.getItem('alias', (err, alias) => {console.log(alias);return alias;});
+
+
+  const users = [{
+    "name": "John",
+    "color": "blue",
+  },{
+    "name": "Tim",
+    "color": "red",
+  },{
+    "name": "Mike",
+    "color": "green",
+  }];
+  
+  const contributor_names = item.contributors.map(item => item.alias).join(', ');
+  console.log(contributor_names);
+  const alias = AsyncStorage.getItem('alias', (err, alias) => {console.log(alias);return alias;});
+  //console.log(alias);
+  
+      getValueLocally=(array)=>{
+  
+  //AsyncStorage.getItem('Key_27').then((value) => this.setState({ getValue : value }))
+  const alias = AsyncStorage.getItem('alias', (err, alias) => {console.log(alias);return alias;});
+  array.filter((item)=>!alias.includes(item))
+  
+  }
+
   return (
 
     <View style={{flex:1,flexDirection:'row'}}>
@@ -63,7 +84,7 @@ const ChatioChatsScreen = ({ navigation }) => {
       <FlatList
 
         data={state}
-        //extraData={props}
+        //extraData={alias}
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
 
@@ -96,7 +117,7 @@ const ChatioChatsScreen = ({ navigation }) => {
                         //item.participants.contributors.filter(item=>item !== item.profile)
                       }
                       {
-                        item.participants.contributors
+                        contributor_names
                       }
                     </Text>
 
@@ -135,7 +156,7 @@ ChatioChatsScreen.navigationOptions = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('Profile', { id: state.id })}>
 
         <Image
-          source={{uri : 'https://io-venny-api.imgix.net/images/16177718_10154838094185396_8364198342188418754_o.png'}}
+          source={{uri: 'https://io-venny-api.imgix.net/images/16177718_10154838094185396_8364198342188418754_o.png'}}
           style={{ width: 40, height: 40, borderRadius: 40/2, marginLeft : 15 }}
         />
       </TouchableOpacity>

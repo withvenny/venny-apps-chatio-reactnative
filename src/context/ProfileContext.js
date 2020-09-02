@@ -55,6 +55,39 @@ const getProfiles = dispatch => {
   };
 
 };
+
+// Profile GET
+const getProfile = dispatch => {
+
+  //
+  return async (id='',bio='',headline='',access='',status='') => {
+
+    var profile = await AsyncStorage.getItem('profile');
+
+    //
+    let path = '/profiles';
+    path += '?token=' + 'tkn_thentrlco';
+    path += '&app=' + 'app_thentrlco';
+    path += '&profile=' + profile;
+
+    //
+    if(!id == ''){path += '&id='+`${id}`;}
+    if(!bio == ''){path += '&bio='+`${bio}`;}
+    if(!headline == ''){path += '&headline='+`${headline}`;}
+    if(!access == ''){path += '&access='+`${access}`;}
+    if(!status == ''){path += '&status='+`${status}`;}
+
+    //
+    const response = await api.get(path);
+
+    //console.log(path);
+    //console.log(response.data.data);
+
+    dispatch({ type: 'get_profiles', payload: response.data.data });
+
+  };
+
+};
   
 // Profile ADD
 const addProfile = dispatch => {
@@ -153,5 +186,6 @@ export const { Context, Provider } = createDataContext(
     deleteProfile,
     editProfile,
     getProfiles,
+    getProfile,
   },[]
 );

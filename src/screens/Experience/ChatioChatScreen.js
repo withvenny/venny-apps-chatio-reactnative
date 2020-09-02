@@ -137,21 +137,24 @@ const ChatioChatScreen = ({ navigation }) => {
 
         />
 
-          <View style = {{borderWidth:5,width:'100%'}}>
-        <ComposeBar
+        <View style = {{borderWidth:5,width:'100%'}}>
 
-          contributors={contributors}
-          thread={thread}
-          onSubmit={(body,contributors,thread) => {
-            composeMessage(
-              body,
-              contributors,
-              thread,
-              () => navigation.jumpTo('Chat', { id: thread, contributors: contributors })
-            );
-          }}
+          <ComposeBar
 
-        /></View>
+            contributors={contributors}
+            thread={thread}
+            onSubmit={(body,contributors,thread) => {
+              composeMessage(
+                body,
+                contributors,
+                thread,
+                () => navigation.jumpTo('Chat', { id: thread, contributors: contributors })
+              );
+            }}
+
+          />
+
+        </View>
 
       </KeyboardAvoidingView>
 
