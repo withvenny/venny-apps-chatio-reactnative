@@ -59,12 +59,34 @@ const ChatioChatsScreen = ({ navigation }) => {
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
 
-          const contributor_names = item.contributors.map(item => item.alias).join(', ');
+          const empIds = item.profile;
+
+          const contributor_extras = item.contributors.filter(function(itm){
+            return empIds.indexOf(itm.id);
+          });
+          //const contributors_names = contributor_name_list.filter(item=>!profile.includes(item))
+          const contributor_names = contributor_extras.map(item => item.alias).join(', ');
           //console.log(contributor_name_list);
           //const profile=item.profile
-          //const contributor_names = contributor_name_list.filter(item=>!profile.includes(item))
 
           console.log(contributor_names);
+
+          //var data = { contributors : [{"id":"prf_0b9f8467d0bd4","images":"{}","alias":"dontsayhisname"},{"id":"prf_8072738b47905","images":{"profile":{"list":["img_0001","img_0002","img_0003","img_0004"],"default":"img_0001"},"cover":{"list":["img_0005","img_0006","img_0007","img_0008"],"default":"img_0005"}},"alias":"sonofadolphus"}]}
+          //var data = Object.assign({"contributors":"wait"},item.contributors);
+          //var data = item.contributors;
+          //console.log(data);
+          //var empIds = item.profile;
+          //var filteredArray = data.contributors;
+          var contributor_others = item.contributors.filter(function(itm){
+            return empIds.indexOf(itm.id);
+          });
+
+          //console.log("LOG",contributor_others);
+          console.log("LOG",contributor_others);
+
+          //alert(typeof contributor_others);
+
+          //filteredArray = { records : filteredArray };
 
           return (
             
@@ -78,7 +100,9 @@ const ChatioChatsScreen = ({ navigation }) => {
                 <View style={{flex:1,borderColor:'green',borderWidth:0,padding:10}}>
                   
                   <Text>
-                  {item.profile}
+                  {
+                    JSON.stringify(contributor_others)
+                  }
                   </Text>
 
                 </View>
