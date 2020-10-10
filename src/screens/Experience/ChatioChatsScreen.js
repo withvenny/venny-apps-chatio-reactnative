@@ -25,6 +25,7 @@ const ChatioChatsScreen = ({ navigation }) => {
 
   //
   const { state, deleteThread, getThreads } = useContext(ThreadProvider);
+  //console.log("//state/",JSON.stringify(state));
 
   //
   useEffect(() => {
@@ -65,33 +66,22 @@ const ChatioChatsScreen = ({ navigation }) => {
             return empIds.indexOf(itm.id);
           });
 
-          //const contributors_names = contributor_name_list.filter(item=>!profile.includes(item))
           var contributor_names = contributor_others.map(item => item.alias).join(', ');
-          //console.log(contributor_name_list);
-          //const profile=item.profile
 
+          //console.log("//contributor_others",contributor_others);
           //console.log(contributor_names);
 
-          //var data = { contributors : [{"id":"prf_0b9f8467d0bd4","images":"{}","alias":"dontsayhisname"},{"id":"prf_8072738b47905","images":{"profile":{"list":["img_0001","img_0002","img_0003","img_0004"],"default":"img_0001"},"cover":{"list":["img_0005","img_0006","img_0007","img_0008"],"default":"img_0005"}},"alias":"sonofadolphus"}]}
-          //var data = Object.assign({"contributors":"wait"},item.contributors);
-          //var data = item.contributors;
-          //console.log(data);
-          //var empIds = item.profile;
-          //var filteredArray = data.contributors
+          /* http://jsonpath.herokuapp.com/ */
 
-          //console.log("LOG",contributor_others);
-          //console.log("contributor_others//",JSON.stringify(contributor_others[0]));
-          //const others = contributor_others[0];
-          //console.log("others//",others.alias);
-          //console.log("contributor_names//",JSON.stringify(contributor_names));
-          //console.log("item.contributors//",JSON.stringify(item.contributors b));
+          //var contributor_other = contributor_others[0];
 
-          //alert(typeof contributor_others);
-
-          //filteredArray = { records : filteredArray };
-
-          if(contributor_others.images){
-            var source = 'https://io-venny-api.imgix.net/images/'+contributor_others.images.profile.default;
+          //console.log(typeof contributor_other);
+          //var property = 'alias';
+          //console.log(contributor_other);
+          //console.log(Object.keys(contributor_others));
+          //if(contributor_other.images.profile.hasOwnProperty('default')){console.log("TRY NOW",contributor_other.images.profile.default)}else{console.log("no eggs")}
+          if(contributor_others[0].images.profile.default) {
+            var source = 'https://io-venny-api.imgix.net/images/' + contributor_others[0].images.profile.default;
           } else {
             var source = 'https://io-venny-api.imgix.net/images/imgix-error.png';
           }
@@ -165,7 +155,7 @@ ChatioChatsScreen.navigationOptions = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('Profile', { id: state.id })}>
 
         <Image
-          source={{uri: 'https://io-venny-api.imgix.net/images/16177718_10154838094185396_8364198342188418754_o.png'}}
+          source={{uri: 'https://io-venny-api.imgix.net/images/sonofadolphus.jpg'}}
           style={{ width: 40, height: 40, borderRadius: 40/2, marginLeft : 15 }}
         />
       </TouchableOpacity>

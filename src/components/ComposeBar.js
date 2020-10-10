@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Button,
+  TouchableWithoutFeedback,
   StyleSheet,
   Text,
   TextInput,
@@ -13,8 +14,8 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
 
     const [body, setBody] = useState(initialValues.body);
 
-    console.log("ComposeBar/thread/"+thread);
-    console.log("ComposeBar/contributors/"+JSON.stringify(contributors));
+    //console.log("ComposeBar/thread/"+thread);
+    //console.log("ComposeBar/contributors/"+JSON.stringify(contributors));
 
     return (
 
@@ -32,11 +33,11 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
 
         </View>
 
-        <View style={{flex:1}}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={{flex:1}}>
 
           <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
 
-        </View>
+        </TouchableWithoutFeedback>
 
       </View>
 

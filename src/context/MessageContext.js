@@ -29,7 +29,7 @@ const addMessage = dispatch => {
   //
   return async (thread,body,deleted,callback) => {
 
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
     //Alert.alert("New token set for addMessage: " + profile);
     
@@ -45,12 +45,12 @@ const addMessage = dispatch => {
       path += '&deleted=' + `${deleted}`;
 
       //
-      console.log("path: " + path);
+      //console.log("path: " + path);
   
       //
       const response = await api.post(path);
   
-      console.log(response);
+      //console.log(response);
   
       if (callback) {
       callback();
@@ -64,7 +64,7 @@ const getMessages = dispatch => {
   //
   return async (thread) => {
 
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
     //Alert.alert("New token set for getMessages: " + profile);
   
@@ -80,12 +80,12 @@ const getMessages = dispatch => {
       //path += '&deleted='+`${deleted}`;
       
       //
-      console.log("path: " + path);
+      //console.log("path: " + path);
       
       //
       const response = await api.get(path);
 
-      console.log(response.data.data);
+      //console.log(response.data.data);
   
       dispatch({ type: 'get_messages', payload: response.data.data });
 
@@ -120,7 +120,7 @@ const editMessage = dispatch => {
       //
       const response = await api.put(path);
   
-      console.log(response);
+      //console.log(response);
   
       if (callback) {
         callback();
@@ -135,7 +135,7 @@ const deleteMessage = dispatch => {
   //
   return async id => {
 
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
     //Alert.alert("New token set for deleteMessage: " + profile);
   
@@ -151,7 +151,7 @@ const deleteMessage = dispatch => {
       //path += '&deleted=' + `${deleted}`;
 
       //
-      console.log("path: " + path);
+      //console.log("path: " + path);
   
       const response = await api.delete(path);
   
@@ -167,7 +167,7 @@ const composeMessage = dispatch => {
   //
   return async (body,contributors,thread,callback) => {
 
-    console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
+    //console.log(await AsyncStorage.getItem('Profile: ' + 'profile'));
     var profile = await AsyncStorage.getItem('profile');
     //Alert.alert("MessageContext.token.composeMessage: " + profile);
 
@@ -183,8 +183,8 @@ const composeMessage = dispatch => {
     participants.contributors.push(contributors);
 
     //Result:
-    console.log("MessageContext.composeMessage.participants." + JSON.stringify(participants));
-    console.log("MessageContext.composeMessage.participants.contributors." + contributors);
+    //console.log("MessageContext.composeMessage.participants." + JSON.stringify(participants));
+    //console.log("MessageContext.composeMessage.participants.contributors." + contributors);
     
       //
       let path = '/compose?';
@@ -199,12 +199,12 @@ const composeMessage = dispatch => {
       //path += '&deleted=' + `${deleted}`;
 
       //
-      console.log("path: " + path);
+      //console.log("path: " + path);
   
       //
       const response = await api.post(path);
   
-      console.log(response);
+      //console.log(response);
   
       if (callback) {
       callback();

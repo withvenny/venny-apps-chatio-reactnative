@@ -77,7 +77,7 @@ const ChatioChatScreen = ({ navigation }) => {
   //
   return (
 
-    <SafeAreaView style={{flex:1,backgroundColor:'rgb(0,0,0)'}}>
+    <SafeAreaView style={{flex:1,backgroundColor:'rgb(255,255,255)'}}>
 
       <KeyboardAvoidingView
         style={{backgroundColor:'rgb(222,222,222)',flex:1,position:'absolute',bottom:0,width:'100%',alignItems:'center'}}
@@ -87,13 +87,13 @@ const ChatioChatScreen = ({ navigation }) => {
       >
 
         <FlatList
-          style={{borderWidth:2,borderColor:'green',width:'100%',flex:1}}
+          style={{borderWidth:0,borderColor:'green',width:'100%',flex:1}}
           data = { state }
           keyExtractor = { message => message.id}
           renderItem = {({ item }) => {
             return (
 
-              <View style={{borderWidth:2,borderColor:'blue',flex:1}}>
+              <View style={{borderWidth:0,borderColor:'blue',flex:1}}>
 
                 <TouchableOpacity
                   onPress={() => navigation.navigate('ShowMessage', { id: item.id })}
@@ -102,7 +102,7 @@ const ChatioChatScreen = ({ navigation }) => {
 
                   <View style={{flex:1,borderColor:'green',borderWidth:0,padding:10}}>
 
-                    <View style={{borderWidth:1,borderColor:'pink'}}>
+                    <View style={{borderWidth:0,borderColor:'pink'}}>
                       <Text>
                       {item.profile}
                       </Text>
@@ -112,14 +112,14 @@ const ChatioChatScreen = ({ navigation }) => {
 
                   <View style={{flex:4,borderColor:'red',borderWidth:0,flexDirection:'column'}}>
 
-                    <View style={{borderWidth:1,borderColor:'black'}}>
+                    <View style={{borderWidth:0,borderColor:'black'}}>
                       <Text>
                       {item.profile} {moment(item.updated).fromNow()}
 
                       </Text>
                     </View>
 
-                    <View style={{borderWidth:1,borderColor:'orange'}}>
+                    <View style={{borderWidth:0,borderColor:'orange'}}>
                       <Text>
                       {item.body}
                       </Text>
@@ -137,7 +137,7 @@ const ChatioChatScreen = ({ navigation }) => {
 
         />
 
-        <View style = {{borderWidth:5,width:'100%'}}>
+        <View style = {{borderWidth:0,width:'100%'}}>
 
           <ComposeBar
 

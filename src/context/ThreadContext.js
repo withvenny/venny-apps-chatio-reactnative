@@ -56,7 +56,8 @@ const getThreads = dispatch => {
       //
       const response = await api.get(path);
 
-      //console.log(response.data.data);
+      //console.log("//ThreadContext/",response.data.data);
+      //console.log("//ThreadContext/JSON",JSON.stringify(response.data.data));
   
       dispatch({ type: 'get_threads', payload: response.data.data });
 
