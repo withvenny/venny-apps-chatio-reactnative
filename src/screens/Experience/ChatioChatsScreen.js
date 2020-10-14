@@ -5,6 +5,7 @@ import {
   FlatList,
   StyleSheet,
   Text,
+  RefreshControl,
   TouchableOpacity,
   View
 } from 'react-native';
@@ -57,6 +58,7 @@ const ChatioChatsScreen = ({ navigation }) => {
 
         data={state}
         //extraData={alias}
+        //refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         keyExtractor={thread => thread.id}
         renderItem={({ item }) => {
 

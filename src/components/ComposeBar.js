@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import {
   Button,
-  TouchableWithoutFeedback,
   StyleSheet,
   Text,
+  Keyboard,
   TextInput,
-  View
+  View,
+  Alert
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
+const clearKeyboard = () => {
+
+  Keyboard.dismiss();
+  //Alert.alert("//clearKeyboard/")
+
+}
 // ADD MORE NAVIGATION VALUES 
 const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
 
@@ -24,20 +31,23 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
         <View style={{flex:4}}>
 
           <TextInput
-          value={body}
-          autoCorrect={true}
-          autoCapitalize='none'
-          placeholder={'Enter the index to scroll'}
-          onChangeText={text => setBody(text)}
+            value={body}
+            autoCorrect={true}
+            autoCapitalize='none'
+            placeholder={'Enter the index to scroll'}
+            onChangeText={text => setBody(text)}
           />
 
         </View>
 
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={{flex:1}}>
+        <View style={{flex:1}}>
 
-          <Button title="Send" onPress={() => onSubmit(body,contributors,thread)} />
+          <Button title="Send" onPress={
+            () => onSubmit(body,contributors,thread),
+            () => clearKeyboard()
+          }/>
 
-        </TouchableWithoutFeedback>
+        </View>
 
       </View>
 

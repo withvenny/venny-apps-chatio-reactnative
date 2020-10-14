@@ -73,7 +73,7 @@ const ChatioChatScreen = ({ navigation }) => {
     };
 
   }, [])
-  
+
   //
   return (
 
@@ -83,12 +83,12 @@ const ChatioChatScreen = ({ navigation }) => {
         style={{backgroundColor:'rgb(222,222,222)',flex:1,position:'absolute',bottom:0,width:'100%',alignItems:'center'}}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         enabled
-        keyboardVerticalOffset={getVerticalOffset()}
-      >
+        keyboardVerticalOffset={getVerticalOffset()}>
 
         <FlatList
           style={{borderWidth:0,borderColor:'green',width:'100%',flex:1}}
           data = { state }
+          inverted
           keyExtractor = { message => message.id}
           renderItem = {({ item }) => {
             return (
