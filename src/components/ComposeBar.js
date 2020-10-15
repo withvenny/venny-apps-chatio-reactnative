@@ -10,15 +10,17 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const clearKeyboard = () => {
-
-  Keyboard.dismiss();
-  //Alert.alert("//clearKeyboard/")
-
-}
-// ADD MORE NAVIGATION VALUES 
 const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
 
+  clearKeyboard = () => {
+
+    Keyboard.dismiss();
+    Alert.alert("//clearKeyboard/");
+    onSubmit(body,contributors,thread);
+
+  }
+  // ADD MORE NAVIGATION VALUES 
+  
     const [body, setBody] = useState(initialValues.body);
 
     //console.log("ComposeBar/thread/"+thread);
@@ -36,16 +38,14 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
             autoCapitalize='none'
             placeholder={'Enter the index to scroll'}
             onChangeText={text => setBody(text)}
+            multiline={true}
           />
 
         </View>
 
         <View style={{flex:1}}>
 
-          <Button title="Send" onPress={
-            () => onSubmit(body,contributors,thread),
-            () => clearKeyboard()
-          }/>
+          <Button title="Send" onPress={() => clearKeyboard()}/>
 
         </View>
 
