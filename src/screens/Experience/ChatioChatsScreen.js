@@ -154,11 +154,11 @@ ChatioChatsScreen.navigationOptions = ({ navigation }) => {
   return {
     headerLeft: ()=>(
      
-      <TouchableOpacity onPress={() => navigation.navigate('Profile', { id: state.id })}>
+      <TouchableOpacity onPress={() => navigation.navigate('Account'/*, { id: state.id }*/)}>
 
         <Image
           source={{uri: 'https://io-venny-api.imgix.net/images/sonofadolphus.jpg'}}
-          style={{ width: 40, height: 40, borderRadius: 40/2, marginLeft : 15 }}
+          style={{ width: 35, height: 35, borderRadius: 35/2, marginLeft : 15 }}
         />
       </TouchableOpacity>
     ),

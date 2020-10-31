@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   NativeModules,
   Platform,
+  Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -51,8 +52,9 @@ const ChatioChatScreen = ({ navigation }) => {
   //
   useEffect(() => {
 
-    //console.log("ChatioChatScreen/thread/"+thread);
-    //console.log("ChatioChatScreen/contributors/"+contributors);
+    //console.log("//ChatioChatScreen/thread/"+thread);
+    //console.log("//ChatioChatScreen/contributors/"+contributors);
+    //console.log("//state/"+JSON.stringify(state));
 
     getMessages(thread);
 
@@ -77,7 +79,7 @@ const ChatioChatScreen = ({ navigation }) => {
   //
   return (
 
-    <SafeAreaView style={{flex:1,backgroundColor:'rgb(255,255,255)'}}>
+    <SafeAreaView style={{flex:1,borderWidth:5,backgroundColor:'rgb(255,255,255)'}}>
 
       <KeyboardAvoidingView
         style={{backgroundColor:'rgb(222,222,222)',flex:1,position:'absolute',bottom:0,width:'100%',alignItems:'center'}}
@@ -91,10 +93,16 @@ const ChatioChatScreen = ({ navigation }) => {
           inverted
           keyExtractor = { message => message.id}
           renderItem = {({ item }) => {
+
+            if(item.profile[0].images.profile.default) {
+            var source = 'https://io-venny-api.imgix.net/images/' + item.profile[0].images.profile.default;
+          } else {
+            var source = 'https://io-venny-api.imgix.net/images/imgix-error.png';
+          }
+
             return (
 
-              <View style={{borderWidth:0,borderColor:'blue',flex:1}}>
-
+              <View style={{flex:1,borderWidth:0,borderColor:'blue',flex:1}}>
                 <TouchableOpacity
                   onPress={() => navigation.navigate('ShowMessage', { id: item.id })}
                   style={{flex:1,flexDirection:'row',borderColor:'blue',borderWidth:0}}
@@ -103,20 +111,23 @@ const ChatioChatScreen = ({ navigation }) => {
                   <View style={{flex:1,borderColor:'green',borderWidth:0,padding:10}}>
 
                     <View style={{borderWidth:0,borderColor:'pink'}}>
-                      <Text>
-                      {item.profile}
-                      </Text>
+                      <Image
+                        style={{ borderWidth:0,borderColor:'black', width: 50, height: 50, borderRadius: 40/10, /*marginLeft : 10*/ }}
+                        source={{uri:source}}
+                      />
                     </View>
 
                   </View>
 
-                  <View style={{flex:4,borderColor:'red',borderWidth:0,flexDirection:'column'}}>
+                  <View style={{flex:7,borderColor:'red',borderWidth:0,flexDirection:'column'}}>
 
-                    <View style={{borderWidth:0,borderColor:'black'}}>
-                      <Text>
-                      {item.profile} {moment(item.updated).fromNow()}
+                    <View style={{borderWidth:0,borderColor:'pink'}}>
 
-                      </Text>
+                      <View style={{borderWidth:0,borderColor:'black',flexDirection:'row',marginTop:8}}>
+                        <Text style={{fontSize:16,fontWeight:'bold',marginRight:5}}>{item.profile[0].alias}</Text>
+                        <Text style={{fontSize:12,marginTop:3}}>{moment(item.updated).fromNow()}</Text>
+                      </View>
+
                     </View>
 
                     <View style={{borderWidth:0,borderColor:'orange'}}>
@@ -144,6 +155,7 @@ const ChatioChatScreen = ({ navigation }) => {
             contributors={contributors}
             thread={thread}
             onSubmit={(body,contributors,thread) => {
+              Keyboard.dismiss(),
               composeMessage(
                 body,
                 contributors,
@@ -157,7 +169,7 @@ const ChatioChatScreen = ({ navigation }) => {
         </View>
 
       </KeyboardAvoidingView>
-
+      
     </SafeAreaView>
 
   );

@@ -12,13 +12,6 @@ import { Feather } from '@expo/vector-icons';
 
 const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
 
-  clearKeyboard = () => {
-
-    Keyboard.dismiss();
-    Alert.alert("//clearKeyboard/");
-    onSubmit(body,contributors,thread);
-
-  }
   // ADD MORE NAVIGATION VALUES 
   
     const [body, setBody] = useState(initialValues.body);
@@ -39,13 +32,14 @@ const ComposeBar = ({ onSubmit, thread, contributors, initialValues }) => {
             placeholder={'Enter the index to scroll'}
             onChangeText={text => setBody(text)}
             multiline={true}
+            style={{height:60}}
           />
 
         </View>
 
         <View style={{flex:1}}>
 
-          <Button title="Send" onPress={() => clearKeyboard()}/>
+          <Button title="Send" onPress={() => onSubmit(body,contributors,thread)}/>
 
         </View>
 
